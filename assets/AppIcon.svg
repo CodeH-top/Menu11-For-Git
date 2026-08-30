@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title description">
+  <title id="title">Menu11 for Git</title>
+  <desc id="description">A warm orange-red Windows tile with two commit rails forming an angular source-control merge.</desc>
+  <rect x="16" y="16" width="224" height="224" rx="56" fill="#F4512C" />
+
+  <g
+      fill="none"
+      stroke="#FFF8F4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="16">
+    <path d="M82 68V190" />
+    <path d="M174 68V96L82 143" />
+  </g>
+
+  <g fill="#F4512C" stroke="#FFF8F4" stroke-width="9">
+    <circle cx="82" cy="68" r="13" />
+    <circle cx="174" cy="68" r="13" />
+    <circle cx="82" cy="143" r="13" />
+  </g>
+</svg>

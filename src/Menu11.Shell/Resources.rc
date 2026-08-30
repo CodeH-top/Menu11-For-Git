@@ -1,0 +1,57 @@
+#include <winres.h>
+
+#include "Menu11.Shared/ProductVersion.h"
+#include "Resource.h"
+
+IDI_MENU11_APP ICON "..\\..\\assets\\AppIcon.ico"
+IDI_MENU11_GIT_BASH ICON "..\\..\\assets\\icons\\git-bash.ico"
+IDI_MENU11_GIT_GUI ICON "..\\..\\assets\\icons\\git-gui.ico"
+IDI_MENU11_GIT ICON "..\\..\\assets\\icons\\git.ico"
+IDI_MENU11_STATUS ICON "..\\..\\assets\\icons\\status.ico"
+IDI_MENU11_PULL ICON "..\\..\\assets\\icons\\pull.ico"
+IDI_MENU11_FETCH ICON "..\\..\\assets\\icons\\fetch.ico"
+IDI_MENU11_PUSH ICON "..\\..\\assets\\icons\\push.ico"
+IDI_MENU11_COMMIT ICON "..\\..\\assets\\icons\\commit.ico"
+IDI_MENU11_LOG ICON "..\\..\\assets\\icons\\log.ico"
+IDI_MENU11_BRANCH ICON "..\\..\\assets\\icons\\branch.ico"
+IDI_MENU11_STASH ICON "..\\..\\assets\\icons\\stash.ico"
+IDI_MENU11_ADD ICON "..\\..\\assets\\icons\\add.ico"
+IDI_MENU11_DIFF ICON "..\\..\\assets\\icons\\diff.ico"
+IDI_MENU11_BLAME ICON "..\\..\\assets\\icons\\blame.ico"
+IDI_MENU11_RESTORE ICON "..\\..\\assets\\icons\\restore.ico"
+IDI_MENU11_CLONE ICON "..\\..\\assets\\icons\\clone.ico"
+IDI_MENU11_INIT ICON "..\\..\\assets\\icons\\init.ico"
+IDI_MENU11_SETTINGS ICON "..\\..\\assets\\icons\\settings.ico"
+
+1 VERSIONINFO
+ FILEVERSION MENU11_VERSION_COMMA
+ PRODUCTVERSION MENU11_VERSION_COMMA
+ FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+#ifdef _DEBUG
+ FILEFLAGS VS_FF_DEBUG
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS VOS_NT_WINDOWS32
+ FILETYPE VFT_DLL
+ FILESUBTYPE VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "Menu11 for Git contributors\0"
+            VALUE "FileDescription", "Menu11 Windows 11 context menu extension\0"
+            VALUE "FileVersion", MENU11_VERSION_RESOURCE_STRING
+            VALUE "InternalName", "Menu11.Shell\0"
+            VALUE "LegalCopyright", "Copyright (c) 2026 Menu11 for Git contributors\0"
+            VALUE "OriginalFilename", "Menu11.Shell.dll\0"
+            VALUE "ProductName", "Menu11 for Git\0"
+            VALUE "ProductVersion", MENU11_VERSION_RESOURCE_STRING
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 1200
+    END
+END

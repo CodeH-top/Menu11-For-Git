@@ -1,0 +1,152 @@
+<Application
+    x:Class="Menu11.App.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <controls:XamlControlsResources />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="PageTitleStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+            </Style>
+            <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Margin" Value="0,16,0,7" />
+            </Style>
+            <Style x:Key="SettingRowStyle" TargetType="Border">
+                <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="6" />
+                <Setter Property="Padding" Value="14,10" />
+                <Setter Property="Margin" Value="0,0,0,4" />
+            </Style>
+            <Style
+                x:Key="SettingTileStyle"
+                BasedOn="{StaticResource SettingRowStyle}"
+                TargetType="Border">
+                <Setter Property="MinHeight" Value="52" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="14,8" />
+            </Style>
+            <Style
+                x:Key="CommandTileStyle"
+                BasedOn="{StaticResource SettingRowStyle}"
+                TargetType="Border">
+                <Setter Property="MinHeight" Value="42" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="9,3" />
+            </Style>
+            <Style x:Key="CompactNavigationItemStyle" TargetType="NavigationViewItem">
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="MinHeight" Value="32" />
+                <Setter Property="Padding" Value="0" />
+            </Style>
+            <Style x:Key="IconTextButtonStyle" TargetType="Button">
+                <Setter Property="MinHeight" Value="30" />
+                <Setter Property="Padding" Value="8,4" />
+                <Setter Property="CornerRadius" Value="7" />
+            </Style>
+            <Style x:Key="ButtonIconViewboxStyle" TargetType="Viewbox">
+                <Setter Property="Width" Value="11" />
+                <Setter Property="Height" Value="11" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Stretch" Value="Uniform" />
+            </Style>
+            <Style x:Key="ButtonLabelStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="CompactToggleSwitchStyle" TargetType="ToggleSwitch">
+                <Setter Property="OnContent" Value="{x:Null}" />
+                <Setter Property="OffContent" Value="{x:Null}" />
+                <Setter Property="MinWidth" Value="42" />
+                <Setter Property="MinHeight" Value="32" />
+                <Setter Property="UseSystemFocusVisuals" Value="True" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleSwitch">
+                            <Grid
+                                Width="42"
+                                Height="32"
+                                Background="Transparent"
+                                Control.IsTemplateFocusTarget="True">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="SwitchSurface.Opacity" Value="0.88" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Target="SwitchSurface.Opacity" Value="0.72" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <VisualState.Setters>
+                                                <Setter Target="SwitchSurface.Opacity" Value="0.38" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="ToggleStates">
+                                        <VisualState x:Name="Dragging" />
+                                        <VisualState x:Name="Off" />
+                                        <VisualState x:Name="On">
+                                            <VisualState.Setters>
+                                                <Setter Target="OuterBorder.Opacity" Value="0" />
+                                                <Setter Target="SwitchKnobBounds.Opacity" Value="1" />
+                                                <Setter Target="KnobTranslateTransform.X" Value="18" />
+                                                <Setter Target="SwitchKnob.Fill" Value="{ThemeResource TextOnAccentFillColorPrimaryBrush}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid x:Name="SwitchSurface" VerticalAlignment="Center">
+                                    <Border
+                                        x:Name="OuterBorder"
+                                        Width="42"
+                                        Height="24"
+                                        Background="{ThemeResource ToggleSwitchFillOff}"
+                                        BorderBrush="{ThemeResource ToggleSwitchStrokeOff}"
+                                        BorderThickness="1"
+                                        CornerRadius="12" />
+                                    <Border
+                                        x:Name="SwitchKnobBounds"
+                                        Width="42"
+                                        Height="24"
+                                        Background="{ThemeResource AccentFillColorDefaultBrush}"
+                                        CornerRadius="12"
+                                        Opacity="0" />
+                                    <Ellipse
+                                        x:Name="SwitchKnob"
+                                        Width="18"
+                                        Height="18"
+                                        HorizontalAlignment="Left"
+                                        Margin="3,0,0,0"
+                                        Fill="{ThemeResource ToggleSwitchKnobFillOff}">
+                                        <Ellipse.RenderTransform>
+                                            <TranslateTransform x:Name="KnobTranslateTransform" />
+                                        </Ellipse.RenderTransform>
+                                    </Ellipse>
+                                </Grid>
+                                <Thumb x:Name="SwitchThumb">
+                                    <Thumb.Template>
+                                        <ControlTemplate TargetType="Thumb">
+                                            <Rectangle Fill="Transparent" />
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

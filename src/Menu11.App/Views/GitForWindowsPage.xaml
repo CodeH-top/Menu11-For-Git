@@ -1,0 +1,99 @@
+<Page
+    x:Class="Menu11.App.Views.GitForWindowsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer
+        HorizontalContentAlignment="Stretch"
+        HorizontalScrollMode="Disabled"
+        HorizontalScrollBarVisibility="Disabled">
+        <StackPanel
+            Padding="28,22,28,32"
+            HorizontalAlignment="Stretch">
+            <TextBlock x:Uid="GitForWindowsPageTitle" Style="{StaticResource PageTitleStyle}" />
+
+            <TextBlock x:Uid="DetectedInstallationSection" Style="{StaticResource SectionTitleStyle}" />
+            <Border Style="{StaticResource SettingRowStyle}">
+                <StackPanel Spacing="10">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <SymbolIcon Symbol="Accept" Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
+                        <TextBlock
+                            FontWeight="SemiBold"
+                            Text="{x:Bind ViewModel.GitStatus, Mode=OneWay}" />
+                    </StackPanel>
+                    <Grid ColumnSpacing="16" RowSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="112" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Uid="GitLocationLabel" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.GitInstallRoot, Mode=OneWay}" TextWrapping="Wrap" />
+                        <TextBlock x:Uid="GitVersionLabel" Grid.Row="1" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind ViewModel.GitVersion, Mode=OneWay}" />
+                        <TextBlock x:Uid="GitSourceLabel" Grid.Row="2" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind ViewModel.GitDetectionSourceLabel, Mode=OneWay}" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <TextBlock x:Uid="InstallationLocationSection" Style="{StaticResource SectionTitleStyle}" />
+            <Border Style="{StaticResource SettingRowStyle}">
+                <StackPanel Spacing="10">
+                    <TextBox
+                        x:Name="GitPathBox"
+                        x:Uid="GitPathBox"
+                        Text="{x:Bind ViewModel.ConfiguredGitPath, Mode=OneWay}" />
+                    <Grid HorizontalAlignment="Left" ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button Click="Browse_Click" Style="{StaticResource IconTextButtonStyle}">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <Viewbox Style="{StaticResource ButtonIconViewboxStyle}">
+                                    <SymbolIcon Symbol="OpenLocal" />
+                                </Viewbox>
+                                <TextBlock x:Uid="BrowseButtonLabel" Style="{StaticResource ButtonLabelStyle}" />
+                            </StackPanel>
+                        </Button>
+                        <Button Grid.Column="1" Click="UsePath_Click" Style="{StaticResource IconTextButtonStyle}">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <Viewbox Style="{StaticResource ButtonIconViewboxStyle}">
+                                    <SymbolIcon Symbol="Accept" />
+                                </Viewbox>
+                                <TextBlock x:Uid="UsePathButtonLabel" Style="{StaticResource ButtonLabelStyle}" />
+                            </StackPanel>
+                        </Button>
+                        <Button Grid.Column="2" Click="Automatic_Click" Style="{StaticResource IconTextButtonStyle}">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <Viewbox Style="{StaticResource ButtonIconViewboxStyle}">
+                                    <SymbolIcon Symbol="Setting" />
+                                </Viewbox>
+                                <TextBlock x:Uid="AutomaticButtonLabel" Style="{StaticResource ButtonLabelStyle}" />
+                            </StackPanel>
+                        </Button>
+                        <Button Grid.Column="3" Click="DetectAgain_Click" Style="{StaticResource IconTextButtonStyle}">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <Viewbox Style="{StaticResource ButtonIconViewboxStyle}">
+                                    <SymbolIcon Symbol="Refresh" />
+                                </Viewbox>
+                                <TextBlock x:Uid="DetectAgainButtonLabel" Style="{StaticResource ButtonLabelStyle}" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <InfoBar
+                x:Name="PathResultBar"
+                Margin="0,10,0,0"
+                IsClosable="True"
+                IsOpen="False" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

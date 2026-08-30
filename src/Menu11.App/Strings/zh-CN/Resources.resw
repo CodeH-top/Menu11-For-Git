@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="CommandStatus" xml:space="preserve"><value>Status</value></data>
+  <data name="CommandPull" xml:space="preserve"><value>Pull</value></data>
+  <data name="CommandFetch" xml:space="preserve"><value>Fetch</value></data>
+  <data name="CommandPush" xml:space="preserve"><value>Push</value></data>
+  <data name="CommandCommit" xml:space="preserve"><value>Commit</value></data>
+  <data name="CommandLog" xml:space="preserve"><value>Log</value></data>
+  <data name="CommandBranch" xml:space="preserve"><value>Branch</value></data>
+  <data name="CommandStash" xml:space="preserve"><value>Stash</value></data>
+  <data name="CommandAdd" xml:space="preserve"><value>Add</value></data>
+  <data name="CommandDiff" xml:space="preserve"><value>Diff</value></data>
+  <data name="CommandBlame" xml:space="preserve"><value>Blame</value></data>
+  <data name="CommandRestore" xml:space="preserve"><value>Restore</value></data>
+  <data name="CommandClone" xml:space="preserve"><value>Clone...</value></data>
+  <data name="CommandInit" xml:space="preserve"><value>Init</value></data>
+  <data name="GitStatusDetected" xml:space="preserve"><value>已检测到 Git for Windows</value></data>
+  <data name="GitStatusNotDetected" xml:space="preserve"><value>未检测到 Git for Windows</value></data>
+  <data name="NotDetected" xml:space="preserve"><value>未检测到</value></data>
+  <data name="NotAvailable" xml:space="preserve"><value>不可用</value></data>
+  <data name="VersionFormat" xml:space="preserve"><value>版本 {0}</value></data>
+  <data name="EnabledSummaryFormat" xml:space="preserve"><value>已启用 {0}/{1} 项</value></data>
+  <data name="SourceMachineRegistry64" xml:space="preserve"><value>计算机注册表（64 位）</value></data>
+  <data name="SourceMachineRegistry32" xml:space="preserve"><value>计算机注册表（32 位）</value></data>
+  <data name="SourceUserRegistry64" xml:space="preserve"><value>用户注册表（64 位）</value></data>
+  <data name="SourceUserRegistry32" xml:space="preserve"><value>用户注册表（32 位）</value></data>
+  <data name="SourcePath" xml:space="preserve"><value>PATH 环境变量</value></data>
+  <data name="SourceCommonLocation" xml:space="preserve"><value>常用安装位置</value></data>
+  <data name="SourceUserSelected" xml:space="preserve"><value>用户选择的位置</value></data>
+  <data name="SourceUnknown" xml:space="preserve"><value>未知</value></data>
+  <data name="Navigation.PaneTitle" xml:space="preserve"><value>Menu11 for Git</value></data>
+  <data name="NavGeneral.Content" xml:space="preserve"><value>常规</value></data>
+  <data name="NavGitMenu.Content" xml:space="preserve"><value>Git 菜单</value></data>
+  <data name="NavGitForWindows.Content" xml:space="preserve"><value>Git for Windows</value></data>
+  <data name="NavAbout.Content" xml:space="preserve"><value>关于</value></data>
+  <data name="GeneralPageTitle.Text" xml:space="preserve"><value>常规</value></data>
+  <data name="GeneralSectionMenu11.Text" xml:space="preserve"><value>设置</value></data>
+  <data name="EnableMenuLabel.Text" xml:space="preserve"><value>启用 Menu11 右键菜单</value></data>
+  <data name="EnableMenuToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>启用 Menu11 右键菜单</value></data>
+  <data name="GeneralCommandsSection.Text" xml:space="preserve"><value>常用命令</value></data>
+  <data name="GitBashLabel.Text" xml:space="preserve"><value>在此处打开 Git Bash</value></data>
+  <data name="GitBashToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>在此处打开 Git Bash</value></data>
+  <data name="GitGuiLabel.Text" xml:space="preserve"><value>在此处打开 Git GUI</value></data>
+  <data name="GitGuiToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>在此处打开 Git GUI</value></data>
+  <data name="ApplicationSection.Text" xml:space="preserve"><value>应用程序</value></data>
+  <data name="SettingsMenuLabel.Text" xml:space="preserve"><value>在 Git 菜单中显示“设置”</value></data>
+  <data name="SettingsMenuToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>在 Git 菜单中显示设置</value></data>
+  <data name="LanguageLabel.Text" xml:space="preserve"><value>语言</value></data>
+  <data name="LanguageDescription.Text" xml:space="preserve"><value>Menu11 设置中心与资源管理器命令的显示语言</value></data>
+  <data name="LanguageSystemOption.Content" xml:space="preserve"><value>系统语言</value></data>
+  <data name="LanguageEnglishOption.Content" xml:space="preserve"><value>English</value></data>
+  <data name="LanguageChineseOption.Content" xml:space="preserve"><value>简体中文</value></data>
+  <data name="ExplorerSection.Text" xml:space="preserve"><value>操作</value></data>
+  <data name="RefreshExplorerButtonLabel.Text" xml:space="preserve"><value>刷新资源管理器</value></data>
+  <data name="RestoreDefaultsButtonLabel.Text" xml:space="preserve"><value>恢复默认设置</value></data>
+  <data name="ExplorerRefreshedTitle" xml:space="preserve"><value>已刷新资源管理器</value></data>
+  <data name="ExplorerRefreshedMessage" xml:space="preserve"><value>新的右键菜单设置将在下次打开资源管理器菜单时生效。</value></data>
+  <data name="RestoreDefaultsDialogTitle" xml:space="preserve"><value>恢复默认设置？</value></data>
+  <data name="RestoreDefaultsDialogContent" xml:space="preserve"><value>这将重置 Menu11 命令、语言和资源管理器偏好。</value></data>
+  <data name="RestoreDefaultsDialogPrimary" xml:space="preserve"><value>恢复</value></data>
+  <data name="Cancel" xml:space="preserve"><value>取消</value></data>
+  <data name="DefaultsRestoredTitle" xml:space="preserve"><value>已恢复默认设置</value></data>
+  <data name="LanguageSavedTitle" xml:space="preserve"><value>语言设置已保存</value></data>
+  <data name="LanguageRestartMessage" xml:space="preserve"><value>请重新启动 Menu11 for Git 以更新设置界面；资源管理器命令会立即使用新语言。</value></data>
+  <data name="GitMenuPageTitle.Text" xml:space="preserve"><value>Git 菜单</value></data>
+  <data name="SelectAllButtonLabel.Text" xml:space="preserve"><value>全选</value></data>
+  <data name="ClearAllButtonLabel.Text" xml:space="preserve"><value>全部清除</value></data>
+  <data name="RepositorySection.Text" xml:space="preserve"><value>仓库</value></data>
+  <data name="FileSection.Text" xml:space="preserve"><value>文件</value></data>
+  <data name="OtherSection.Text" xml:space="preserve"><value>其他</value></data>
+  <data name="GitForWindowsPageTitle.Text" xml:space="preserve"><value>Git for Windows</value></data>
+  <data name="DetectedInstallationSection.Text" xml:space="preserve"><value>检测到的安装</value></data>
+  <data name="GitLocationLabel.Text" xml:space="preserve"><value>位置</value></data>
+  <data name="GitVersionLabel.Text" xml:space="preserve"><value>版本</value></data>
+  <data name="GitSourceLabel.Text" xml:space="preserve"><value>来源</value></data>
+  <data name="InstallationLocationSection.Text" xml:space="preserve"><value>安装位置</value></data>
+  <data name="GitPathBox.Header" xml:space="preserve"><value>Git for Windows 文件夹</value></data>
+  <data name="GitPathBox.PlaceholderText" xml:space="preserve"><value>自动检测</value></data>
+  <data name="BrowseButtonLabel.Text" xml:space="preserve"><value>浏览</value></data>
+  <data name="UsePathButtonLabel.Text" xml:space="preserve"><value>使用此位置</value></data>
+  <data name="AutomaticButtonLabel.Text" xml:space="preserve"><value>使用自动检测</value></data>
+  <data name="DetectAgainButtonLabel.Text" xml:space="preserve"><value>重新检测</value></data>
+  <data name="AutomaticDetectionEnabled" xml:space="preserve"><value>已启用自动检测</value></data>
+  <data name="GitLocationSaved" xml:space="preserve"><value>已保存 Git for Windows 位置</value></data>
+  <data name="GitLocationNotFound" xml:space="preserve"><value>在此位置未找到 Git for Windows。</value></data>
+  <data name="CommandIconsLabel.Text" xml:space="preserve"><value>命令图标</value></data>
+  <data name="CommandIconsDescription.Text" xml:space="preserve"><value>在资源管理器命令旁显示 Menu11 图标</value></data>
+  <data name="CommandIconsToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>命令图标</value></data>
+  <data name="AboutProductName.Text" xml:space="preserve"><value>Menu11 for Git</value></data>
+  <data name="AboutDescription.Text" xml:space="preserve"><value>面向 Git for Windows 的轻量级 Windows 11 原生现代右键菜单扩展。</value></data>
+  <data name="AboutDisclaimer.Text" xml:space="preserve"><value>Menu11 for Git 是独立的第三方项目，与 Git Project 或 Git for Windows 没有关联，也未获得其认可或背书。</value></data>
+  <data name="GitHubButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>在 GitHub 打开 Menu11 for Git 项目</value></data>
+  <data name="UpdatesButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>检查并验证最新 GitHub Release</value></data>
+  <data name="GitHubButtonLabel.Text" xml:space="preserve"><value>GitHub</value></data>
+  <data name="LicenseButtonLabel.Text" xml:space="preserve"><value>许可证</value></data>
+  <data name="UpdatesButtonLabel.Text" xml:space="preserve"><value>检查更新</value></data>
+  <data name="UnableOpenProjectPage" xml:space="preserve"><value>无法打开项目页面。</value></data>
+  <data name="UnableOpenReleasesPage" xml:space="preserve"><value>无法打开发布页面。</value></data>
+  <data name="UnableOpenLicense" xml:space="preserve"><value>无法打开已安装的许可证文件。</value></data>
+  <data name="LicenseDialogTitle" xml:space="preserve"><value>MIT 许可证</value></data>
+  <data name="Close" xml:space="preserve"><value>关闭</value></data>
+  <data name="ActionFailed" xml:space="preserve"><value>操作失败</value></data>
+  <data name="UpdatesSection.Text" xml:space="preserve"><value>更新</value></data>
+  <data name="AutomaticUpdatesLabel.Text" xml:space="preserve"><value>Menu11 启动时检查更新</value></data>
+  <data name="AutomaticUpdatesDescription.Text" xml:space="preserve"><value>仅在设置中心打开期间检查 GitHub Release</value></data>
+  <data name="AutomaticUpdatesToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Menu11 启动时检查更新</value></data>
+  <data name="CheckingForUpdatesTitle" xml:space="preserve"><value>正在检查更新</value></data>
+  <data name="CheckingForUpdatesMessage" xml:space="preserve"><value>正在连接 Menu11 for Git 发布页面...</value></data>
+  <data name="UpToDateTitle" xml:space="preserve"><value>Menu11 已是最新版本</value></data>
+  <data name="UpToDateMessage" xml:space="preserve"><value>版本 {0} 是当前最新公开版本。</value></data>
+  <data name="UpdateAvailableTitle" xml:space="preserve"><value>发现新版本</value></data>
+  <data name="UpdateAvailableMessage" xml:space="preserve"><value>Menu11 for Git {1} 已发布，当前版本为 {0}。安装程序将从 GitHub 下载，并在启动前完成 SHA-256 校验。</value></data>
+  <data name="DownloadAndInstall" xml:space="preserve"><value>下载并安装</value></data>
+  <data name="DownloadingUpdateTitle" xml:space="preserve"><value>正在下载更新</value></data>
+  <data name="DownloadingUpdateMessage" xml:space="preserve"><value>正在下载安装程序并校验 SHA-256...</value></data>
+  <data name="UpdateAvailableLaterMessage" xml:space="preserve"><value>版本 {0} 仍可安装，准备好后可再次检查更新。</value></data>
+  <data name="UpdateCancelledTitle" xml:space="preserve"><value>已取消更新</value></data>
+  <data name="UpdateCancelledMessage" xml:space="preserve"><value>没有启动任何安装程序。</value></data>
+  <data name="UpdateFailedTitle" xml:space="preserve"><value>无法验证更新</value></data>
+  <data name="UpdateFailedMessage" xml:space="preserve"><value>请检查网络连接后重试。未通过 Release 或 SHA-256 校验的安装程序绝不会被运行。</value></data>
+  <data name="UpdateBusyTitle" xml:space="preserve"><value>更新检查正在运行</value></data>
+  <data name="UpdateBusyMessage" xml:space="preserve"><value>请等待当前检查完成后再试。</value></data>
+</root>

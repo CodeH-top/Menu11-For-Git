@@ -1,0 +1,11 @@
+{
+  "name": "menu11-asset-pipeline",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build-assets.mjs"
+  },
+  "dependencies": {
+    "sharp": "0.35.4"
+  }
+}

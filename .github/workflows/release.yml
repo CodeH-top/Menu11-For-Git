@@ -1,0 +1,143 @@
+name: Build and publish Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Windows x64 Release
+    runs-on: windows-2025
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      DOTNET_NOLOGO: "1"
+
+    steps:
+      - name: Check out the tagged source
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify tag, version, and main branch
+        run: |
+          $tag = $env:GITHUB_REF_NAME
+          if ($tag -cnotmatch '^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$') {
+            throw "Release tag must use the exact three-component form vX.Y.Z: $tag"
+          }
+
+          [xml] $props = Get-Content -LiteralPath 'eng/Product.props' -Raw
+          $version = [string] $props.Project.PropertyGroup.Menu11Version
+          $fileVersion = [string] $props.Project.PropertyGroup.Menu11FileVersion
+          if ($tag -cne "v$version") {
+            throw "Tag $tag does not match Menu11Version $version."
+          }
+          if ($fileVersion -cne "$version.0") {
+            throw "Menu11FileVersion must be the three-component product version plus a fixed .0."
+          }
+
+          git fetch --no-tags origin main
+          if ($LASTEXITCODE -ne 0) {
+            throw 'Unable to fetch origin/main for release ancestry validation.'
+          }
+          git merge-base --is-ancestor $env:GITHUB_SHA origin/main
+          if ($LASTEXITCODE -ne 0) {
+            throw 'Release tags must point to a commit contained in main.'
+          }
+
+          "MENU11_RELEASE_VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "8.0.424"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: tools/assets/package-lock.json
+
+      - name: Install asset dependencies
+        working-directory: tools/assets
+        run: npm ci --no-audit --no-fund
+
+      - name: Regenerate and verify branding assets
+        run: |
+          ./eng/build-assets.ps1
+          git diff --exit-code -- assets
+          if ($LASTEXITCODE -ne 0) {
+            throw 'Committed branding assets are not reproducible. Run eng/build-assets.ps1 and commit the result.'
+          }
+
+      - name: Install Inno Setup
+        run: choco install innosetup --yes --no-progress
+
+      - name: Build Release
+        run: ./eng/build.ps1 -Configuration Release -Platform x64 -Rebuild
+
+      - name: Run native and managed tests
+        run: ./eng/test.ps1 -Configuration Release -Platform x64 -NoBuild
+
+      - name: Validate sparse package manifests
+        run: ./eng/validate-package-manifests.ps1
+
+      - name: Build branded Setup
+        run: ./eng/build-installer.ps1 -Configuration Release -Platform x64 -NoBuild
+
+      - name: Generate and verify SHA-256 manifest
+        run: |
+          $version = $env:MENU11_RELEASE_VERSION
+          $installerName = "Menu11ForGitSetup-$version-x64.exe"
+          $installer = Join-Path 'installer/output' $installerName
+          if (-not (Test-Path -LiteralPath $installer)) {
+            throw "Release installer was not produced: $installer"
+          }
+
+          $hash = (Get-FileHash -LiteralPath $installer -Algorithm SHA256).Hash.ToLowerInvariant()
+          $manifest = "$installer.sha256"
+          "$hash *$installerName" | Set-Content -LiteralPath $manifest -Encoding ascii -NoNewline
+
+          $manifestLine = (Get-Content -LiteralPath $manifest -Raw).Trim()
+          if ($manifestLine -cne "$hash *$installerName") {
+            throw 'The generated SHA-256 manifest is malformed.'
+          }
+          if ((Get-FileHash -LiteralPath $installer -Algorithm SHA256).Hash.ToLowerInvariant() -cne $hash) {
+            throw 'The installer changed after its SHA-256 manifest was generated.'
+          }
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: Menu11ForGit-${{ env.MENU11_RELEASE_VERSION }}-x64
+          path: |
+            installer/output/Menu11ForGitSetup-${{ env.MENU11_RELEASE_VERSION }}-x64.exe
+            installer/output/Menu11ForGitSetup-${{ env.MENU11_RELEASE_VERSION }}-x64.exe.sha256
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $version = $env:MENU11_RELEASE_VERSION
+          $installer = "installer/output/Menu11ForGitSetup-$version-x64.exe"
+          $manifest = "$installer.sha256"
+          gh release create $env:GITHUB_REF_NAME $installer $manifest `
+            --verify-tag `
+            --title "Menu11 for Git $version" `
+            --generate-notes `
+            --latest

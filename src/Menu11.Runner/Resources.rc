@@ -1,0 +1,38 @@
+#include <winres.h>
+
+#include "Menu11.Shared/ProductVersion.h"
+
+101 ICON "..\\..\\assets\\AppIcon.ico"
+
+1 VERSIONINFO
+ FILEVERSION MENU11_VERSION_COMMA
+ PRODUCTVERSION MENU11_VERSION_COMMA
+ FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+#ifdef _DEBUG
+ FILEFLAGS VS_FF_DEBUG
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS VOS_NT_WINDOWS32
+ FILETYPE VFT_APP
+ FILESUBTYPE VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "Menu11 for Git contributors\0"
+            VALUE "FileDescription", "Menu11 native Git command runner\0"
+            VALUE "FileVersion", MENU11_VERSION_RESOURCE_STRING
+            VALUE "InternalName", "Menu11.Runner\0"
+            VALUE "LegalCopyright", "Copyright (c) 2026 Menu11 for Git contributors\0"
+            VALUE "OriginalFilename", "Menu11.Runner.exe\0"
+            VALUE "ProductName", "Menu11 for Git\0"
+            VALUE "ProductVersion", MENU11_VERSION_RESOURCE_STRING
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 1200
+    END
+END

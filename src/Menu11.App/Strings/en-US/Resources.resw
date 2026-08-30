@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="CommandStatus" xml:space="preserve"><value>Status</value></data>
+  <data name="CommandPull" xml:space="preserve"><value>Pull</value></data>
+  <data name="CommandFetch" xml:space="preserve"><value>Fetch</value></data>
+  <data name="CommandPush" xml:space="preserve"><value>Push</value></data>
+  <data name="CommandCommit" xml:space="preserve"><value>Commit</value></data>
+  <data name="CommandLog" xml:space="preserve"><value>Log</value></data>
+  <data name="CommandBranch" xml:space="preserve"><value>Branch</value></data>
+  <data name="CommandStash" xml:space="preserve"><value>Stash</value></data>
+  <data name="CommandAdd" xml:space="preserve"><value>Add</value></data>
+  <data name="CommandDiff" xml:space="preserve"><value>Diff</value></data>
+  <data name="CommandBlame" xml:space="preserve"><value>Blame</value></data>
+  <data name="CommandRestore" xml:space="preserve"><value>Restore</value></data>
+  <data name="CommandClone" xml:space="preserve"><value>Clone...</value></data>
+  <data name="CommandInit" xml:space="preserve"><value>Init</value></data>
+  <data name="GitStatusDetected" xml:space="preserve"><value>Git for Windows detected</value></data>
+  <data name="GitStatusNotDetected" xml:space="preserve"><value>Git for Windows not detected</value></data>
+  <data name="NotDetected" xml:space="preserve"><value>Not detected</value></data>
+  <data name="NotAvailable" xml:space="preserve"><value>Not available</value></data>
+  <data name="VersionFormat" xml:space="preserve"><value>Version {0}</value></data>
+  <data name="EnabledSummaryFormat" xml:space="preserve"><value>{0} of {1} enabled</value></data>
+  <data name="SourceMachineRegistry64" xml:space="preserve"><value>Machine registry (64-bit)</value></data>
+  <data name="SourceMachineRegistry32" xml:space="preserve"><value>Machine registry (32-bit)</value></data>
+  <data name="SourceUserRegistry64" xml:space="preserve"><value>User registry (64-bit)</value></data>
+  <data name="SourceUserRegistry32" xml:space="preserve"><value>User registry (32-bit)</value></data>
+  <data name="SourcePath" xml:space="preserve"><value>PATH environment</value></data>
+  <data name="SourceCommonLocation" xml:space="preserve"><value>Common installation location</value></data>
+  <data name="SourceUserSelected" xml:space="preserve"><value>User-selected location</value></data>
+  <data name="SourceUnknown" xml:space="preserve"><value>Unknown</value></data>
+  <data name="Navigation.PaneTitle" xml:space="preserve"><value>Menu11 for Git</value></data>
+  <data name="NavGeneral.Content" xml:space="preserve"><value>General</value></data>
+  <data name="NavGitMenu.Content" xml:space="preserve"><value>Git Menu</value></data>
+  <data name="NavGitForWindows.Content" xml:space="preserve"><value>Git for Windows</value></data>
+  <data name="NavAbout.Content" xml:space="preserve"><value>About</value></data>
+  <data name="GeneralPageTitle.Text" xml:space="preserve"><value>General</value></data>
+  <data name="GeneralSectionMenu11.Text" xml:space="preserve"><value>Settings</value></data>
+  <data name="EnableMenuLabel.Text" xml:space="preserve"><value>Enable Menu11 context menu</value></data>
+  <data name="EnableMenuToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Enable Menu11 context menu</value></data>
+  <data name="GeneralCommandsSection.Text" xml:space="preserve"><value>General commands</value></data>
+  <data name="GitBashLabel.Text" xml:space="preserve"><value>Git Bash Here</value></data>
+  <data name="GitBashToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Git Bash Here</value></data>
+  <data name="GitGuiLabel.Text" xml:space="preserve"><value>Git GUI Here</value></data>
+  <data name="GitGuiToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Git GUI Here</value></data>
+  <data name="ApplicationSection.Text" xml:space="preserve"><value>Application</value></data>
+  <data name="SettingsMenuLabel.Text" xml:space="preserve"><value>Show Settings in Git menu</value></data>
+  <data name="SettingsMenuToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Show Settings in Git menu</value></data>
+  <data name="LanguageLabel.Text" xml:space="preserve"><value>Language</value></data>
+  <data name="LanguageDescription.Text" xml:space="preserve"><value>Display language for Menu11 and Explorer commands</value></data>
+  <data name="LanguageSystemOption.Content" xml:space="preserve"><value>System language</value></data>
+  <data name="LanguageEnglishOption.Content" xml:space="preserve"><value>English</value></data>
+  <data name="LanguageChineseOption.Content" xml:space="preserve"><value>Simplified Chinese</value></data>
+  <data name="ExplorerSection.Text" xml:space="preserve"><value>Actions</value></data>
+  <data name="RefreshExplorerButtonLabel.Text" xml:space="preserve"><value>Refresh Explorer</value></data>
+  <data name="RestoreDefaultsButtonLabel.Text" xml:space="preserve"><value>Restore defaults</value></data>
+  <data name="ExplorerRefreshedTitle" xml:space="preserve"><value>Explorer refreshed</value></data>
+  <data name="ExplorerRefreshedMessage" xml:space="preserve"><value>Context menu settings are ready for the next Explorer menu.</value></data>
+  <data name="RestoreDefaultsDialogTitle" xml:space="preserve"><value>Restore default settings?</value></data>
+  <data name="RestoreDefaultsDialogContent" xml:space="preserve"><value>Your Menu11 commands, language, and Explorer preferences will be reset.</value></data>
+  <data name="RestoreDefaultsDialogPrimary" xml:space="preserve"><value>Restore</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="DefaultsRestoredTitle" xml:space="preserve"><value>Defaults restored</value></data>
+  <data name="LanguageSavedTitle" xml:space="preserve"><value>Language saved</value></data>
+  <data name="LanguageRestartMessage" xml:space="preserve"><value>Restart Menu11 for Git to update the Settings interface. Explorer commands use the new language immediately.</value></data>
+  <data name="GitMenuPageTitle.Text" xml:space="preserve"><value>Git Menu</value></data>
+  <data name="SelectAllButtonLabel.Text" xml:space="preserve"><value>Select all</value></data>
+  <data name="ClearAllButtonLabel.Text" xml:space="preserve"><value>Clear all</value></data>
+  <data name="RepositorySection.Text" xml:space="preserve"><value>Repository</value></data>
+  <data name="FileSection.Text" xml:space="preserve"><value>File</value></data>
+  <data name="OtherSection.Text" xml:space="preserve"><value>Other</value></data>
+  <data name="GitForWindowsPageTitle.Text" xml:space="preserve"><value>Git for Windows</value></data>
+  <data name="DetectedInstallationSection.Text" xml:space="preserve"><value>Detected installation</value></data>
+  <data name="GitLocationLabel.Text" xml:space="preserve"><value>Location</value></data>
+  <data name="GitVersionLabel.Text" xml:space="preserve"><value>Version</value></data>
+  <data name="GitSourceLabel.Text" xml:space="preserve"><value>Source</value></data>
+  <data name="InstallationLocationSection.Text" xml:space="preserve"><value>Installation location</value></data>
+  <data name="GitPathBox.Header" xml:space="preserve"><value>Git for Windows folder</value></data>
+  <data name="GitPathBox.PlaceholderText" xml:space="preserve"><value>Automatic detection</value></data>
+  <data name="BrowseButtonLabel.Text" xml:space="preserve"><value>Browse</value></data>
+  <data name="UsePathButtonLabel.Text" xml:space="preserve"><value>Use this location</value></data>
+  <data name="AutomaticButtonLabel.Text" xml:space="preserve"><value>Use automatic detection</value></data>
+  <data name="DetectAgainButtonLabel.Text" xml:space="preserve"><value>Detect again</value></data>
+  <data name="AutomaticDetectionEnabled" xml:space="preserve"><value>Automatic detection enabled</value></data>
+  <data name="GitLocationSaved" xml:space="preserve"><value>Git for Windows location saved</value></data>
+  <data name="GitLocationNotFound" xml:space="preserve"><value>No Git for Windows installation was found at this location.</value></data>
+  <data name="CommandIconsLabel.Text" xml:space="preserve"><value>Command icons</value></data>
+  <data name="CommandIconsDescription.Text" xml:space="preserve"><value>Show Menu11 icons beside Explorer commands</value></data>
+  <data name="CommandIconsToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Command icons</value></data>
+  <data name="AboutProductName.Text" xml:space="preserve"><value>Menu11 for Git</value></data>
+  <data name="AboutDescription.Text" xml:space="preserve"><value>A lightweight Windows 11 modern context menu extension for Git for Windows.</value></data>
+  <data name="AboutDisclaimer.Text" xml:space="preserve"><value>Menu11 for Git is an independent third-party project and is not affiliated with or endorsed by the Git Project or Git for Windows.</value></data>
+  <data name="GitHubButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Open the Menu11 for Git project on GitHub</value></data>
+  <data name="UpdatesButton.[using:Microsoft.UI.Xaml.Controls]ToolTipService.ToolTip" xml:space="preserve"><value>Check the latest verified GitHub Release</value></data>
+  <data name="GitHubButtonLabel.Text" xml:space="preserve"><value>GitHub</value></data>
+  <data name="LicenseButtonLabel.Text" xml:space="preserve"><value>License</value></data>
+  <data name="UpdatesButtonLabel.Text" xml:space="preserve"><value>Check for updates</value></data>
+  <data name="UnableOpenProjectPage" xml:space="preserve"><value>Unable to open the project page.</value></data>
+  <data name="UnableOpenReleasesPage" xml:space="preserve"><value>Unable to open the releases page.</value></data>
+  <data name="UnableOpenLicense" xml:space="preserve"><value>Unable to open the installed license file.</value></data>
+  <data name="LicenseDialogTitle" xml:space="preserve"><value>MIT License</value></data>
+  <data name="Close" xml:space="preserve"><value>Close</value></data>
+  <data name="ActionFailed" xml:space="preserve"><value>Action failed</value></data>
+  <data name="UpdatesSection.Text" xml:space="preserve"><value>Updates</value></data>
+  <data name="AutomaticUpdatesLabel.Text" xml:space="preserve"><value>Check for updates when Menu11 starts</value></data>
+  <data name="AutomaticUpdatesDescription.Text" xml:space="preserve"><value>Checks GitHub Releases only while the settings center is open</value></data>
+  <data name="AutomaticUpdatesToggle.[using:Microsoft.UI.Xaml.Automation]AutomationProperties.Name" xml:space="preserve"><value>Check for updates when Menu11 starts</value></data>
+  <data name="CheckingForUpdatesTitle" xml:space="preserve"><value>Checking for updates</value></data>
+  <data name="CheckingForUpdatesMessage" xml:space="preserve"><value>Contacting the Menu11 for Git release page...</value></data>
+  <data name="UpToDateTitle" xml:space="preserve"><value>Menu11 is up to date</value></data>
+  <data name="UpToDateMessage" xml:space="preserve"><value>Version {0} is the latest published version.</value></data>
+  <data name="UpdateAvailableTitle" xml:space="preserve"><value>Update available</value></data>
+  <data name="UpdateAvailableMessage" xml:space="preserve"><value>Menu11 for Git {1} is available. You are using {0}. The installer will be downloaded from GitHub and verified with SHA-256 before it starts.</value></data>
+  <data name="DownloadAndInstall" xml:space="preserve"><value>Download and install</value></data>
+  <data name="DownloadingUpdateTitle" xml:space="preserve"><value>Downloading update</value></data>
+  <data name="DownloadingUpdateMessage" xml:space="preserve"><value>Downloading the installer and verifying its SHA-256 checksum...</value></data>
+  <data name="UpdateAvailableLaterMessage" xml:space="preserve"><value>Version {0} remains available. Check again when you are ready to install it.</value></data>
+  <data name="UpdateCancelledTitle" xml:space="preserve"><value>Update cancelled</value></data>
+  <data name="UpdateCancelledMessage" xml:space="preserve"><value>No installer was started.</value></data>
+  <data name="UpdateFailedTitle" xml:space="preserve"><value>Unable to verify the update</value></data>
+  <data name="UpdateFailedMessage" xml:space="preserve"><value>Check your internet connection and try again. Menu11 will never run an installer that fails release or SHA-256 validation.</value></data>
+  <data name="UpdateBusyTitle" xml:space="preserve"><value>Update check already running</value></data>
+  <data name="UpdateBusyMessage" xml:space="preserve"><value>Wait for the current check to finish, then try again.</value></data>
+</root>

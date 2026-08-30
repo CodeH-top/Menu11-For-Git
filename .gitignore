@@ -1,0 +1,34 @@
+# Build output
+artifacts/
+bin/
+obj/
+.vs/
+
+# Visual Studio and MSBuild
+*.user
+*.suo
+*.VC.db
+*.VC.opendb
+*.vcxproj.filters
+
+# NuGet
+packages/
+*.nupkg
+
+# Node-based build tools
+node_modules/
+
+# Packaging and signing output
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+*.cer
+*.pfx
+
+# Installer output
+installer/output/
+
+# Local logs and test output
+*.log
+TestResults/

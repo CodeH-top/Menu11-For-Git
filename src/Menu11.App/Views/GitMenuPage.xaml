@@ -1,0 +1,122 @@
+<Page
+    x:Class="Menu11.App.Views.GitMenuPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewModels="using:Menu11.App.ViewModels">
+    <ScrollViewer
+        HorizontalContentAlignment="Stretch"
+        HorizontalScrollMode="Disabled"
+        HorizontalScrollBarVisibility="Disabled">
+        <StackPanel
+            Padding="28,22,28,32"
+            HorizontalAlignment="Stretch">
+            <Grid ColumnSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    x:Uid="GitMenuPageTitle"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource PageTitleStyle}" />
+                <StackPanel
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    Spacing="6">
+                    <Button Click="SelectAll_Click" Style="{StaticResource IconTextButtonStyle}">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Viewbox Style="{StaticResource ButtonIconViewboxStyle}">
+                                <SymbolIcon Symbol="SelectAll" />
+                            </Viewbox>
+                            <TextBlock x:Uid="SelectAllButtonLabel" Style="{StaticResource ButtonLabelStyle}" />
+                        </StackPanel>
+                    </Button>
+                    <Button Click="ClearAll_Click" Style="{StaticResource IconTextButtonStyle}">
+                        <StackPanel Orientation="Horizontal" Spacing="5">
+                            <Viewbox Style="{StaticResource ButtonIconViewboxStyle}">
+                                <SymbolIcon Symbol="Clear" />
+                            </Viewbox>
+                            <TextBlock x:Uid="ClearAllButtonLabel" Style="{StaticResource ButtonLabelStyle}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <TextBlock x:Uid="RepositorySection" Style="{StaticResource SectionTitleStyle}" />
+            <ItemsRepeater ItemsSource="{x:Bind ViewModel.RepositoryCommands, Mode=OneWay}">
+                <ItemsRepeater.Layout>
+                    <UniformGridLayout
+                        ItemsJustification="Start"
+                        ItemsStretch="Fill"
+                        MaximumRowsOrColumns="4"
+                        MinColumnSpacing="8"
+                        MinItemHeight="42"
+                        MinItemWidth="140"
+                        MinRowSpacing="8"
+                        Orientation="Horizontal" />
+                </ItemsRepeater.Layout>
+                <ItemsRepeater.ItemTemplate>
+                    <DataTemplate x:DataType="viewModels:GitCommandSettingViewModel">
+                        <Border Style="{StaticResource CommandTileStyle}">
+                            <CheckBox
+                                HorizontalAlignment="Stretch"
+                                Content="{x:Bind DisplayName, Mode=OneWay}"
+                                IsChecked="{x:Bind IsEnabled, Mode=TwoWay}" />
+                        </Border>
+                    </DataTemplate>
+                </ItemsRepeater.ItemTemplate>
+            </ItemsRepeater>
+
+            <TextBlock x:Uid="FileSection" Style="{StaticResource SectionTitleStyle}" />
+            <ItemsRepeater ItemsSource="{x:Bind ViewModel.FileCommands, Mode=OneWay}">
+                <ItemsRepeater.Layout>
+                    <UniformGridLayout
+                        ItemsJustification="Start"
+                        ItemsStretch="Fill"
+                        MaximumRowsOrColumns="4"
+                        MinColumnSpacing="8"
+                        MinItemHeight="42"
+                        MinItemWidth="140"
+                        MinRowSpacing="8"
+                        Orientation="Horizontal" />
+                </ItemsRepeater.Layout>
+                <ItemsRepeater.ItemTemplate>
+                    <DataTemplate x:DataType="viewModels:GitCommandSettingViewModel">
+                        <Border Style="{StaticResource CommandTileStyle}">
+                            <CheckBox
+                                HorizontalAlignment="Stretch"
+                                Content="{x:Bind DisplayName, Mode=OneWay}"
+                                IsChecked="{x:Bind IsEnabled, Mode=TwoWay}" />
+                        </Border>
+                    </DataTemplate>
+                </ItemsRepeater.ItemTemplate>
+            </ItemsRepeater>
+
+            <TextBlock x:Uid="OtherSection" Style="{StaticResource SectionTitleStyle}" />
+            <ItemsRepeater ItemsSource="{x:Bind ViewModel.OtherCommands, Mode=OneWay}">
+                <ItemsRepeater.Layout>
+                    <UniformGridLayout
+                        ItemsJustification="Start"
+                        ItemsStretch="Fill"
+                        MaximumRowsOrColumns="4"
+                        MinColumnSpacing="8"
+                        MinItemHeight="42"
+                        MinItemWidth="140"
+                        MinRowSpacing="8"
+                        Orientation="Horizontal" />
+                </ItemsRepeater.Layout>
+                <ItemsRepeater.ItemTemplate>
+                    <DataTemplate x:DataType="viewModels:GitCommandSettingViewModel">
+                        <Border Style="{StaticResource CommandTileStyle}">
+                            <CheckBox
+                                HorizontalAlignment="Stretch"
+                                Content="{x:Bind DisplayName, Mode=OneWay}"
+                                IsChecked="{x:Bind IsEnabled, Mode=TwoWay}" />
+                        </Border>
+                    </DataTemplate>
+                </ItemsRepeater.ItemTemplate>
+            </ItemsRepeater>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

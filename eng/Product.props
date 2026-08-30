@@ -1,0 +1,22 @@
+<Project>
+  <PropertyGroup>
+    <Menu11ProductName>Menu11 for Git</Menu11ProductName>
+    <Menu11InternalName>Menu11ForGit</Menu11InternalName>
+    <Menu11PublisherDisplayName>Menu11 for Git contributors</Menu11PublisherDisplayName>
+    <Menu11PackageIdentityName>Menu11ForGit</Menu11PackageIdentityName>
+    <Menu11PackagePublisher>CN=Menu11ForGit</Menu11PackagePublisher>
+    <Menu11Version>0.1.1</Menu11Version>
+    <Menu11FileVersion>0.1.1.0</Menu11FileVersion>
+    <Menu11RepositoryUrl Condition="'$(Menu11RepositoryUrl)' == ''">https://github.com/CodeH-top/Menu11-For-Git</Menu11RepositoryUrl>
+
+    <Product>$(Menu11ProductName)</Product>
+    <Company>$(Menu11PublisherDisplayName)</Company>
+    <Authors>$(Menu11PublisherDisplayName)</Authors>
+    <Version>$(Menu11Version)</Version>
+    <AssemblyVersion>$(Menu11FileVersion)</AssemblyVersion>
+    <FileVersion>$(Menu11FileVersion)</FileVersion>
+    <Copyright>Copyright (c) 2026 $(Menu11PublisherDisplayName)</Copyright>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <EmbedUntrackedSources>false</EmbedUntrackedSources>
+  </PropertyGroup>
+</Project>

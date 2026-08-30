@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{723AE991-1217-4B16-952A-879E64151A68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Menu11.App", "src\Menu11.App\Menu11.App.csproj", "{ED27C839-75C5-4EAF-A293-1DE8DF8735C9}"
+EndProject
+Project("{BC8A1FFA-BEE3-4634-8014-F334798102B3}") = "Menu11.Shared.Native", "src\Menu11.Shared.Native\Menu11.Shared.Native.vcxproj", "{4B5C76F7-0E56-4DD2-8BF6-19B62353E01C}"
+EndProject
+Project("{BC8A1FFA-BEE3-4634-8014-F334798102B3}") = "Menu11.Runner", "src\Menu11.Runner\Menu11.Runner.vcxproj", "{A19AA646-467E-40B4-9FDF-B7141BB8743F}"
+EndProject
+Project("{BC8A1FFA-BEE3-4634-8014-F334798102B3}") = "Menu11.Shell", "src\Menu11.Shell\Menu11.Shell.vcxproj", "{36FA6498-FD4B-49D4-8D71-19D62A59085B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Menu11.Shared.Managed", "src\Menu11.Shared.Managed\Menu11.Shared.Managed.csproj", "{95A3C09C-BAB0-4B3D-BFBD-601768F828B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{7D18A1E9-BDCA-435D-A5D3-95DA82324A3E}"
+EndProject
+Project("{BC8A1FFA-BEE3-4634-8014-F334798102B3}") = "Menu11.Native.Tests", "tests\Menu11.Native.Tests\Menu11.Native.Tests.vcxproj", "{0516B70C-7843-4EF0-9568-287DBA365E07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Menu11.Managed.Tests", "tests\Menu11.Managed.Tests\Menu11.Managed.Tests.csproj", "{BC44E0F2-76C9-4624-99AC-94E9C8AD85DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED27C839-75C5-4EAF-A293-1DE8DF8735C9}.Debug|x64.ActiveCfg = Debug|x64
+		{ED27C839-75C5-4EAF-A293-1DE8DF8735C9}.Debug|x64.Build.0 = Debug|x64
+		{ED27C839-75C5-4EAF-A293-1DE8DF8735C9}.Release|x64.ActiveCfg = Release|x64
+		{ED27C839-75C5-4EAF-A293-1DE8DF8735C9}.Release|x64.Build.0 = Release|x64
+		{4B5C76F7-0E56-4DD2-8BF6-19B62353E01C}.Debug|x64.ActiveCfg = Debug|x64
+		{4B5C76F7-0E56-4DD2-8BF6-19B62353E01C}.Debug|x64.Build.0 = Debug|x64
+		{4B5C76F7-0E56-4DD2-8BF6-19B62353E01C}.Release|x64.ActiveCfg = Release|x64
+		{4B5C76F7-0E56-4DD2-8BF6-19B62353E01C}.Release|x64.Build.0 = Release|x64
+		{A19AA646-467E-40B4-9FDF-B7141BB8743F}.Debug|x64.ActiveCfg = Debug|x64
+		{A19AA646-467E-40B4-9FDF-B7141BB8743F}.Debug|x64.Build.0 = Debug|x64
+		{A19AA646-467E-40B4-9FDF-B7141BB8743F}.Release|x64.ActiveCfg = Release|x64
+		{A19AA646-467E-40B4-9FDF-B7141BB8743F}.Release|x64.Build.0 = Release|x64
+		{36FA6498-FD4B-49D4-8D71-19D62A59085B}.Debug|x64.ActiveCfg = Debug|x64
+		{36FA6498-FD4B-49D4-8D71-19D62A59085B}.Debug|x64.Build.0 = Debug|x64
+		{36FA6498-FD4B-49D4-8D71-19D62A59085B}.Release|x64.ActiveCfg = Release|x64
+		{36FA6498-FD4B-49D4-8D71-19D62A59085B}.Release|x64.Build.0 = Release|x64
+		{95A3C09C-BAB0-4B3D-BFBD-601768F828B4}.Debug|x64.ActiveCfg = Debug|x64
+		{95A3C09C-BAB0-4B3D-BFBD-601768F828B4}.Debug|x64.Build.0 = Debug|x64
+		{95A3C09C-BAB0-4B3D-BFBD-601768F828B4}.Release|x64.ActiveCfg = Release|x64
+		{95A3C09C-BAB0-4B3D-BFBD-601768F828B4}.Release|x64.Build.0 = Release|x64
+		{0516B70C-7843-4EF0-9568-287DBA365E07}.Debug|x64.ActiveCfg = Debug|x64
+		{0516B70C-7843-4EF0-9568-287DBA365E07}.Debug|x64.Build.0 = Debug|x64
+		{0516B70C-7843-4EF0-9568-287DBA365E07}.Release|x64.ActiveCfg = Release|x64
+		{0516B70C-7843-4EF0-9568-287DBA365E07}.Release|x64.Build.0 = Release|x64
+		{BC44E0F2-76C9-4624-99AC-94E9C8AD85DE}.Debug|x64.ActiveCfg = Debug|x64
+		{BC44E0F2-76C9-4624-99AC-94E9C8AD85DE}.Debug|x64.Build.0 = Debug|x64
+		{BC44E0F2-76C9-4624-99AC-94E9C8AD85DE}.Release|x64.ActiveCfg = Release|x64
+		{BC44E0F2-76C9-4624-99AC-94E9C8AD85DE}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED27C839-75C5-4EAF-A293-1DE8DF8735C9} = {723AE991-1217-4B16-952A-879E64151A68}
+		{4B5C76F7-0E56-4DD2-8BF6-19B62353E01C} = {723AE991-1217-4B16-952A-879E64151A68}
+		{A19AA646-467E-40B4-9FDF-B7141BB8743F} = {723AE991-1217-4B16-952A-879E64151A68}
+		{36FA6498-FD4B-49D4-8D71-19D62A59085B} = {723AE991-1217-4B16-952A-879E64151A68}
+		{95A3C09C-BAB0-4B3D-BFBD-601768F828B4} = {723AE991-1217-4B16-952A-879E64151A68}
+		{0516B70C-7843-4EF0-9568-287DBA365E07} = {7D18A1E9-BDCA-435D-A5D3-95DA82324A3E}
+		{BC44E0F2-76C9-4624-99AC-94E9C8AD85DE} = {7D18A1E9-BDCA-435D-A5D3-95DA82324A3E}
+	EndGlobalSection
+EndGlobal
