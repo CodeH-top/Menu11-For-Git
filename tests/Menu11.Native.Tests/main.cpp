@@ -108,6 +108,25 @@ namespace
         stream.put('\0');
     }
 
+    [[nodiscard]] bool paths_refer_to_same_entry(
+        const std::filesystem::path& left,
+        const std::filesystem::path& right) noexcept
+    {
+        // Hosted Windows runners can expose temporary directories through reparse points.
+        std::error_code error;
+        return std::filesystem::equivalent(left, right, error) && !error;
+    }
+
+    [[nodiscard]] bool is_git_bash_directory_argument(
+        const std::wstring_view argument,
+        const std::filesystem::path& directory) noexcept
+    {
+        constexpr std::wstring_view prefix = L"--cd=";
+        return argument.starts_with(prefix) && paths_refer_to_same_entry(
+            std::filesystem::path(argument.substr(prefix.size())),
+            directory);
+    }
+
     template <typename function_type>
     [[nodiscard]] function_type load_function(const HMODULE module, const char* name) noexcept
     {
@@ -839,28 +858,32 @@ int wmain(const int argument_count, wchar_t** argument_values)
     touch(second_selected_file);
 
     const auto directory_root = menu11::find_repository_root(nested_directory);
-    expect(directory_root == std::filesystem::weakly_canonical(repository),
+    expect(directory_root && paths_refer_to_same_entry(*directory_root, repository),
         L"finds a parent repository from a Unicode directory");
     const auto file_context = menu11::inspect_repository_context(selected_file);
     expect(file_context.selection_exists && file_context.selection_is_file,
         L"classifies a selected file without invoking Git");
-    expect(file_context.working_directory == std::filesystem::weakly_canonical(nested_directory),
+    expect(paths_refer_to_same_entry(file_context.working_directory, nested_directory),
         L"uses the containing directory for a file selection");
-    expect(file_context.repository_root == std::filesystem::weakly_canonical(repository),
+    expect(file_context.repository_root &&
+            paths_refer_to_same_entry(*file_context.repository_root, repository),
         L"finds a parent repository from a file selection");
 
     const auto worktree = temporary.path() / L"worktree";
     const auto worktree_child = worktree / L"nested";
     std::filesystem::create_directories(worktree_child);
     touch(worktree / L".git");
-    expect(menu11::find_repository_root(worktree_child) == std::filesystem::weakly_canonical(worktree),
+    const auto worktree_root = menu11::find_repository_root(worktree_child);
+    expect(worktree_root && paths_refer_to_same_entry(*worktree_root, worktree),
         L"recognizes a worktree .git file");
 
     const auto nested_repository = nested_directory / L"embedded";
     std::filesystem::create_directories(nested_repository / L".git");
     const auto nested_repository_child = nested_repository / L"deep";
     std::filesystem::create_directories(nested_repository_child);
-    expect(menu11::find_repository_root(nested_repository_child) == std::filesystem::weakly_canonical(nested_repository),
+    const auto detected_nested_repository = menu11::find_repository_root(nested_repository_child);
+    expect(detected_nested_repository &&
+            paths_refer_to_same_entry(*detected_nested_repository, nested_repository),
         L"returns the nearest repository root");
 
     const auto non_repository = temporary.path() / L"plain";
@@ -955,28 +978,32 @@ int wmain(const int argument_count, wchar_t** argument_values)
             .source = menu11::git::detection_source::user_selected,
         };
         const auto file_bash_plan = menu11::git::create_bash_launch_plan(fake_git, selected_file);
-        expect(file_bash_plan && file_bash_plan.options->working_directory ==
-                std::filesystem::weakly_canonical(nested_directory),
+        expect(file_bash_plan && paths_refer_to_same_entry(
+                file_bash_plan.options->working_directory,
+                nested_directory),
             L"Git Bash uses a selected file's containing directory");
         if (file_bash_plan)
         {
             expect(file_bash_plan.options->executable == fake_git.git_bash_executable &&
                     file_bash_plan.options->arguments.size() == 1 &&
-                    file_bash_plan.options->arguments.front() ==
-                        L"--cd=" + std::filesystem::weakly_canonical(nested_directory).wstring(),
+                    is_git_bash_directory_argument(
+                        file_bash_plan.options->arguments.front(),
+                        nested_directory),
                 L"Git Bash receives one supported --cd argument");
             expect(!file_bash_plan.options->wait_for_exit,
                 L"Runner does not remain resident after Git Bash starts");
         }
 
         const auto directory_bash_plan = menu11::git::create_bash_launch_plan(fake_git, nested_directory);
-        expect(directory_bash_plan && directory_bash_plan.options->working_directory ==
-                std::filesystem::weakly_canonical(nested_directory),
+        expect(directory_bash_plan && paths_refer_to_same_entry(
+                directory_bash_plan.options->working_directory,
+                nested_directory),
             L"Git Bash uses a selected directory directly");
 
         const auto file_gui_plan = menu11::git::create_gui_launch_plan(fake_git, selected_file);
-        expect(file_gui_plan && file_gui_plan.options->working_directory ==
-                std::filesystem::weakly_canonical(nested_directory),
+        expect(file_gui_plan && paths_refer_to_same_entry(
+                file_gui_plan.options->working_directory,
+                nested_directory),
             L"Git GUI uses a selected file's containing directory");
         if (file_gui_plan)
         {
@@ -987,8 +1014,9 @@ int wmain(const int argument_count, wchar_t** argument_values)
         }
 
         const auto directory_gui_plan = menu11::git::create_gui_launch_plan(fake_git, nested_directory);
-        expect(directory_gui_plan && directory_gui_plan.options->working_directory ==
-                std::filesystem::weakly_canonical(nested_directory),
+        expect(directory_gui_plan && paths_refer_to_same_entry(
+                directory_gui_plan.options->working_directory,
+                nested_directory),
             L"Git GUI uses a selected directory directly");
 
         auto git_without_gui = fake_git;
@@ -1012,7 +1040,9 @@ int wmain(const int argument_count, wchar_t** argument_values)
                 fake_git,
                 command,
                 nested_directory);
-            expect(plan && plan.options->working_directory == std::filesystem::weakly_canonical(repository),
+            expect(plan && paths_refer_to_same_entry(
+                    plan.options->working_directory,
+                    repository),
                 L"repository command runs from the detected repository root");
             if (plan)
             {
@@ -1038,7 +1068,7 @@ int wmain(const int argument_count, wchar_t** argument_values)
             nested_directory);
         expect(commit_plan && commit_plan.options->executable == fake_git.gui_executable &&
                 commit_plan.options->arguments == std::vector<std::wstring>{L"citool"} &&
-                commit_plan.options->working_directory == std::filesystem::weakly_canonical(repository),
+                paths_refer_to_same_entry(commit_plan.options->working_directory, repository),
             L"Commit launches Git GUI citool from the repository root");
         auto git_without_command_bash = fake_git;
         git_without_command_bash.bash_executable.clear();
@@ -1062,7 +1092,9 @@ int wmain(const int argument_count, wchar_t** argument_values)
             fake_git,
             menu11::runner_command::file_add,
             selected_files);
-        expect(add_plan && add_plan.options->working_directory == std::filesystem::weakly_canonical(repository),
+        expect(add_plan && paths_refer_to_same_entry(
+                add_plan.options->working_directory,
+                repository),
             L"Add supports multiple files from one repository");
         if (add_plan)
         {
@@ -1071,8 +1103,8 @@ int wmain(const int argument_count, wchar_t** argument_values)
                     add_plan.options->arguments[1] == L"-c" &&
                     add_plan.options->arguments[2].starts_with(L"git add --") &&
                     add_plan.options->arguments[3] == L"menu11" &&
-                    add_plan.options->arguments[4] == std::filesystem::weakly_canonical(selected_file).wstring() &&
-                    add_plan.options->arguments[5] == std::filesystem::weakly_canonical(second_selected_file).wstring() &&
+                    paths_refer_to_same_entry(add_plan.options->arguments[4], selected_file) &&
+                    paths_refer_to_same_entry(add_plan.options->arguments[5], second_selected_file) &&
                     (add_plan.options->creation_flags & CREATE_NEW_CONSOLE) != 0,
                 L"file paths are separate Bash positional arguments");
             expect(add_plan.options->arguments[2].find(selected_file.wstring()) == std::wstring::npos &&
@@ -1104,7 +1136,7 @@ int wmain(const int argument_count, wchar_t** argument_values)
             const auto plan = menu11::git::create_file_launch_plan(fake_git, command, one_file);
             expect(plan && plan.options->arguments.size() == 5 &&
                     plan.options->arguments[2].starts_with(expected_script_prefix) &&
-                    plan.options->arguments[4] == std::filesystem::weakly_canonical(selected_file).wstring(),
+                    paths_refer_to_same_entry(plan.options->arguments[4], selected_file),
                 L"single-file Git command uses one positional file argument");
         }
 
@@ -1113,7 +1145,7 @@ int wmain(const int argument_count, wchar_t** argument_values)
             menu11::runner_command::clone,
             non_repository);
         expect(clone_plan &&
-                clone_plan.options->working_directory == std::filesystem::weakly_canonical(non_repository) &&
+                paths_refer_to_same_entry(clone_plan.options->working_directory, non_repository) &&
                 clone_plan.options->arguments.size() == 4 &&
                 clone_plan.options->arguments[0] == L"--login" &&
                 clone_plan.options->arguments[2].find(L"git clone -- \"$menu11_url\"") != std::wstring::npos,
