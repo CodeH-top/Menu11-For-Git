@@ -47,7 +47,7 @@ for (const size of iconSizes) {
 
 await renderPng(appIconSource, join(assetsDirectory, 'AppIcon.png'), 256);
 await renderPng(appIconSource, join(assetsDirectory, 'InstallerLogo.png'), 512);
-await renderPng(installerBannerSource, join(assetsDirectory, 'InstallerBanner.png'), 1024, 320);
+await renderPng(installerBannerSource, join(assetsDirectory, 'InstallerBanner.png'), 656, 1256);
 await renderPng(appIconSource, join(assetsDirectory, 'Square44x44Logo.png'), 44);
 await renderPng(appIconSource, join(assetsDirectory, 'Square150x150Logo.png'), 150);
 await renderPng(appIconSource, join(assetsDirectory, 'StoreLogo.png'), 50);

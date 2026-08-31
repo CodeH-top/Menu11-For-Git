@@ -18,13 +18,25 @@ public sealed partial class GeneralPage : Page
         SelectCurrentLanguage();
     }
 
-    private void RefreshExplorer_Click(object sender, RoutedEventArgs e)
+    private async void RefreshExplorer_Click(object sender, RoutedEventArgs e)
     {
-        ExplorerIntegrationService.Refresh();
-        ShowResult(
-            LocalizationService.GetString("ExplorerRefreshedTitle"),
-            LocalizationService.GetString("ExplorerRefreshedMessage"),
-            InfoBarSeverity.Success);
+        try
+        {
+            await ((App)Application.Current).ContextMenuRegistration.SynchronizeAsync(
+                ViewModel.CurrentSettings,
+                forceRegistration: true);
+            ShowResult(
+                LocalizationService.GetString("ExplorerRefreshedTitle"),
+                LocalizationService.GetString("ExplorerRefreshedMessage"),
+                InfoBarSeverity.Success);
+        }
+        catch (Exception exception)
+        {
+            ShowResult(
+                LocalizationService.GetString("ContextMenuRegistrationFailed"),
+                exception.Message,
+                InfoBarSeverity.Error);
+        }
     }
 
     private async void RestoreDefaults_Click(object sender, RoutedEventArgs e)

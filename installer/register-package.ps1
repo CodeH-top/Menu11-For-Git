@@ -5,11 +5,28 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $packageRoot = Join-Path $InstallDirectory 'Package'
+$registrationErrorLog = Join-Path $InstallDirectory 'Installer\registration-error.log'
 $packageDefinitions = @(
     @{ Name = 'Menu11ForGit.GitBash'; Manifest = 'GitBash\AppxManifest.xml' },
     @{ Name = 'Menu11ForGit.GitGui'; Manifest = 'GitGui\AppxManifest.xml' },
     @{ Name = 'Menu11ForGit.GitCommands'; Manifest = 'GitCommands\AppxManifest.xml' }
 )
+
+if (Test-Path -LiteralPath $registrationErrorLog) {
+    Remove-Item -LiteralPath $registrationErrorLog -Force
+}
+
+trap {
+    $details = $_ | Format-List * -Force | Out-String
+    try {
+        [System.IO.File]::WriteAllText($registrationErrorLog, $details)
+    }
+    catch {
+        # The installer still receives the nonzero exit code if diagnostics cannot be written.
+    }
+    [Console]::Error.WriteLine($details)
+    exit 1
+}
 
 function Send-ShellAssociationChanged {
     try {
@@ -65,6 +82,16 @@ function Test-ReusableRegistration {
             $registeredLocation,
             $expectedLocation,
             [System.StringComparison]::OrdinalIgnoreCase))
+}
+
+$expectedInstallDirectory = Join-Path `
+    ([Environment]::GetFolderPath([Environment+SpecialFolder]::LocalApplicationData)) `
+    'Programs\Menu11 for Git'
+if (-not [string]::Equals(
+    (Get-NormalizedPath $InstallDirectory),
+    (Get-NormalizedPath $expectedInstallDirectory),
+    [System.StringComparison]::OrdinalIgnoreCase)) {
+    throw "Unsupported Menu11 install directory: $InstallDirectory. Expected: $expectedInstallDirectory"
 }
 
 foreach ($definition in $packageDefinitions) {

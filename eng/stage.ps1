@@ -35,6 +35,42 @@ if (Test-Path -LiteralPath $stageDirectory) {
 
 $null = New-Item -ItemType Directory -Path $stageDirectory
 Copy-Item -Path (Join-Path $appOutput '*') -Destination $stageDirectory -Recurse -Force
+
+$supportedCultures = [System.Collections.Generic.HashSet[string]]::new(
+    [System.StringComparer]::OrdinalIgnoreCase)
+foreach ($cultureName in @('en-US', 'zh-CN')) {
+    $null = $supportedCultures.Add($cultureName)
+}
+
+foreach ($directory in Get-ChildItem -LiteralPath $stageDirectory -Directory) {
+    try {
+        $culture = [System.Globalization.CultureInfo]::GetCultureInfo($directory.Name)
+    }
+    catch [System.Globalization.CultureNotFoundException] {
+        continue
+    }
+
+    if (-not $supportedCultures.Contains($culture.Name)) {
+        Remove-Item -LiteralPath $directory.FullName -Recurse -Force
+    }
+}
+
+$unexpectedCultures = @(
+    foreach ($directory in Get-ChildItem -LiteralPath $stageDirectory -Directory) {
+        try {
+            $culture = [System.Globalization.CultureInfo]::GetCultureInfo($directory.Name)
+            if (-not $supportedCultures.Contains($culture.Name)) {
+                $culture.Name
+            }
+        }
+        catch [System.Globalization.CultureNotFoundException] {
+        }
+    }
+)
+if ($unexpectedCultures.Count -ne 0) {
+    throw "Unexpected language directories remain in the installer stage: $($unexpectedCultures -join ', ')"
+}
+
 Copy-Item -LiteralPath (Join-Path $nativeOutput 'Menu11.Runner.exe') -Destination $stageDirectory -Force
 Copy-Item -LiteralPath (Join-Path $nativeOutput 'Menu11.Shell.dll') -Destination $stageDirectory -Force
 Copy-Item -LiteralPath (Join-Path $repoRoot 'LICENSE') -Destination $stageDirectory -Force

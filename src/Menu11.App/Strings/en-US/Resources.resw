@@ -55,6 +55,7 @@
   <data name="RestoreDefaultsButtonLabel.Text" xml:space="preserve"><value>Restore defaults</value></data>
   <data name="ExplorerRefreshedTitle" xml:space="preserve"><value>Explorer refreshed</value></data>
   <data name="ExplorerRefreshedMessage" xml:space="preserve"><value>Context menu settings are ready for the next Explorer menu.</value></data>
+  <data name="ContextMenuRegistrationFailed" xml:space="preserve"><value>Could not update the context menu</value></data>
   <data name="RestoreDefaultsDialogTitle" xml:space="preserve"><value>Restore default settings?</value></data>
   <data name="RestoreDefaultsDialogContent" xml:space="preserve"><value>Your Menu11 commands, language, and Explorer preferences will be reset.</value></data>
   <data name="RestoreDefaultsDialogPrimary" xml:space="preserve"><value>Restore</value></data>

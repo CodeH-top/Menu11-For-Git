@@ -88,7 +88,9 @@ Menu11ForGitSetup-X.Y.Z-x64.exe.sha256
 
 Setup 会把 Menu11 按当前用户安装到
 `%LOCALAPPDATA%\Programs\Menu11 for Git`，注册三个现代右键菜单 Package，并创建
-用户选择的快捷方式。裸 MSIX/Sparse Package 只是实现细节，不是正常分发方式。
+用户选择的快捷方式。此目录由安装程序固定，不能改到其他磁盘或网络位置，因为
+Windows 对 Sparse Package 的外部内容路径有额外信任限制。发布包只携带 English
+和简体中文资源。裸 MSIX/Sparse Package 只是实现细节，不是正常分发方式。
 
 只有设置程序运行时才会进行自动检查。Menu11 访问公开 GitHub Releases API，
 显示可用版本，并等待用户点击**下载并安装**。下载可随时取消；不完整、地址异常或
@@ -125,7 +127,7 @@ cd Menu11-For-Git
 
 ## Release 工作流
 
-推送 `v0.1.1` 这种严格三段式 tag 后，
+推送 `v0.1.2` 这种严格三段式 tag 后，
 [`Build and publish Release`](.github/workflows/release.yml) 工作流会自动运行。
 如果 tag 与 `eng/Product.props` 的版本不同，或 tag 指向的提交不属于 `main`，
 工作流会直接拒绝发布。GitHub 托管的 Windows 2025 runner 会重新生成品牌资产、

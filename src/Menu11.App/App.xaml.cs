@@ -10,6 +10,7 @@ public partial class App : Application
     public MainWindow? MainWindow { get; private set; }
     public SettingsViewModel Settings { get; }
     public UpdateInteractionService Updates { get; } = new();
+    public ContextMenuRegistrationService ContextMenuRegistration { get; } = new();
 
     public App()
     {
@@ -18,12 +19,14 @@ public partial class App : Application
         LocalizationService.ApplyLanguage(settings.Language);
         InitializeComponent();
         Settings = new SettingsViewModel(settings, settingsStore);
+        Settings.ShellSettingsChanged += ContextMenuRegistration.RequestSynchronization;
     }
 
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
         MainWindow = new MainWindow();
         MainWindow.Activate();
+        ContextMenuRegistration.RequestSynchronization(Settings.CurrentSettings);
         if (Settings.AutomaticallyCheckForUpdates)
         {
             _ = CheckForUpdatesAfterLaunchAsync();

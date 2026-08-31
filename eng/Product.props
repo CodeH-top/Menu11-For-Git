@@ -5,8 +5,8 @@
     <Menu11PublisherDisplayName>Menu11 for Git contributors</Menu11PublisherDisplayName>
     <Menu11PackageIdentityName>Menu11ForGit</Menu11PackageIdentityName>
     <Menu11PackagePublisher>CN=Menu11ForGit</Menu11PackagePublisher>
-    <Menu11Version>0.1.1</Menu11Version>
-    <Menu11FileVersion>0.1.1.0</Menu11FileVersion>
+    <Menu11Version>0.1.2</Menu11Version>
+    <Menu11FileVersion>0.1.2.0</Menu11FileVersion>
     <Menu11RepositoryUrl Condition="'$(Menu11RepositoryUrl)' == ''">https://github.com/CodeH-top/Menu11-For-Git</Menu11RepositoryUrl>
 
     <Product>$(Menu11ProductName)</Product>
@@ -17,6 +17,7 @@
     <FileVersion>$(Menu11FileVersion)</FileVersion>
     <Copyright>Copyright (c) 2026 $(Menu11PublisherDisplayName)</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
+    <SatelliteResourceLanguages>en-US;zh-CN</SatelliteResourceLanguages>
     <EmbedUntrackedSources>false</EmbedUntrackedSources>
   </PropertyGroup>
 </Project>

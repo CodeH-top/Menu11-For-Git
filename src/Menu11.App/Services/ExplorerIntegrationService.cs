@@ -6,10 +6,11 @@ public static class ExplorerIntegrationService
 {
     private const uint AssociationChanged = 0x08000000;
     private const uint IdList = 0x0000;
+    private const uint Flush = 0x1000;
 
     public static void Refresh()
     {
-        SHChangeNotify(AssociationChanged, IdList, 0, 0);
+        SHChangeNotify(AssociationChanged, IdList | Flush, 0, 0);
     }
 
     [DllImport("shell32.dll")]

@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Menu11.App.Services;
 using Menu11.App.Views;
 using System.Runtime.InteropServices;
 using Windows.Graphics;
@@ -13,6 +14,9 @@ public sealed partial class MainWindow : Window
         InitializeComponent();
         SetWindowIcon();
         ResizeForCurrentDisplay();
+        ((App)Application.Current).ContextMenuRegistration.SynchronizationFailed +=
+            ContextMenuRegistration_SynchronizationFailed;
+        Closed += MainWindow_Closed;
         Navigation.SelectedItem = Navigation.MenuItems[0];
         ContentFrame.Navigate(typeof(GeneralPage));
     }
@@ -63,6 +67,23 @@ public sealed partial class MainWindow : Window
         {
             ContentFrame.Navigate(pageType);
         }
+    }
+
+    private void ContextMenuRegistration_SynchronizationFailed(
+        object? sender,
+        ContextMenuRegistrationFailedEventArgs e)
+    {
+        DispatcherQueue.TryEnqueue(() => TransientInfoBarService.Show(
+            RegistrationResultBar,
+            LocalizationService.GetString("ContextMenuRegistrationFailed"),
+            e.Exception.Message,
+            InfoBarSeverity.Error));
+    }
+
+    private void MainWindow_Closed(object sender, WindowEventArgs args)
+    {
+        ((App)Application.Current).ContextMenuRegistration.SynchronizationFailed -=
+            ContextMenuRegistration_SynchronizationFailed;
     }
 
     [DllImport("user32.dll")]

@@ -101,8 +101,11 @@ Menu11ForGitSetup-X.Y.Z-x64.exe.sha256
 
 Setup installs Menu11 for the current user under
 `%LOCALAPPDATA%\Programs\Menu11 for Git`, registers the three modern context-menu
-packages, and creates the selected shortcuts. Raw MSIX/Sparse Package files are
-implementation details and are not the normal distribution format.
+packages, and creates the selected shortcuts. Setup fixes this location rather
+than allowing another drive or network path because Windows applies additional
+trust restrictions to Sparse Package external content. Release payloads retain
+only English and Simplified Chinese resources. Raw MSIX/Sparse Package files
+are implementation details and are not the normal distribution format.
 
 Automatic checks occur only while the settings application is running. Menu11
 contacts the public GitHub Releases API, shows the available version, and waits
@@ -143,7 +146,7 @@ Regenerate all application, package, installer, and command icons:
 ## Release workflow
 
 The [`Build and publish Release`](.github/workflows/release.yml) workflow runs
-when an exact three-component tag such as `v0.1.1` is pushed. It rejects a tag
+when an exact three-component tag such as `v0.1.2` is pushed. It rejects a tag
 whose version differs from `eng/Product.props` or whose commit is not contained
 in `main`. On the GitHub-hosted Windows 2025 runner it regenerates branding,
 rebuilds Release x64, runs native and managed tests, validates all Sparse Package

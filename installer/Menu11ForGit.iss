@@ -5,7 +5,7 @@
   #define OutputRoot "output"
 #endif
 #ifndef ProductVersion
-  #define ProductVersion "0.1.1"
+  #define ProductVersion "0.1.2"
 #endif
 
 #define ProductName "Menu11 for Git"
@@ -21,6 +21,10 @@ AppPublisher=Menu11 for Git contributors
 AppComments=Native Windows 11 context menu integration for Git for Windows.
 AppCopyright=Copyright (c) 2026 Menu11 for Git contributors
 DefaultDirName={localappdata}\Programs\Menu11 for Git
+DisableDirPage=yes
+UsePreviousAppDir=no
+AllowNetworkDrive=no
+AllowUNCPath=no
 DefaultGroupName=Menu11 for Git
 DisableProgramGroupPage=auto
 AllowNoIcons=yes
@@ -40,16 +44,20 @@ VersionInfoCompany=Menu11 for Git contributors
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern dynamic windows11 hidebevels includetitlebar
-WizardSizePercent=110
+WizardSizePercent=100
 WizardKeepAspectRatio=yes
 WizardBackColor=#FFFBF9
 WizardBackColorDynamicDark=#321D18
 WizardImageFile=..\assets\InstallerBanner.png
 WizardImageFileDynamicDark=..\assets\InstallerBanner.png
+WizardImageBackColor=#FFFBF9
+WizardImageBackColorDynamicDark=#321D18
 WizardImageStretch=yes
 WizardImageOpacity=255
 WizardSmallImageFile=..\assets\InstallerLogo.png
 WizardSmallImageFileDynamicDark=..\assets\InstallerLogo.png
+WizardSmallImageBackColor=none
+WizardSmallImageBackColorDynamicDark=none
 LicenseFile=..\LICENSE
 CloseApplications=yes
 RestartApplications=no
@@ -79,7 +87,8 @@ english.StartMenuShortcut=Add Menu11 for Git to the Start Menu
 english.DesktopShortcut=Create a desktop shortcut
 english.FinishedReady=Menu11 for Git is ready.%n%nWindows 11 context menu integration has been installed successfully.
 english.LaunchMenu11=Launch Menu11 for Git
-english.RegistrationFailed=Windows 11 context menu registration failed. Setup will stop without reporting a successful installation.
+english.UnsupportedInstallLocation=Menu11 for Git must be installed in the current user's local Programs folder:%n%n%1%n%nCustom install locations are not supported by the Windows 11 context menu package registration.
+english.RegistrationFailed=Windows 11 context menu registration failed. Setup did not complete successfully.%n%nDiagnostic details were saved to:%n%1%n%nRemove Menu11 for Git from Installed apps before retrying.
 english.UnregistrationFailed=Menu11 for Git could not remove its package registration. Close Explorer windows and try uninstalling again.
 
 chinesesimplified.WelcomeTitle=原生 Windows 11 Git 集成
@@ -97,7 +106,8 @@ chinesesimplified.StartMenuShortcut=将 Menu11 for Git 添加到开始菜单
 chinesesimplified.DesktopShortcut=创建桌面快捷方式
 chinesesimplified.FinishedReady=Menu11 for Git 已准备就绪。%n%nWindows 11 右键菜单集成已成功安装。
 chinesesimplified.LaunchMenu11=启动 Menu11 for Git
-chinesesimplified.RegistrationFailed=Windows 11 右键菜单注册失败。安装程序将停止，且不会报告安装成功。
+chinesesimplified.UnsupportedInstallLocation=Menu11 for Git 必须安装到当前用户的本地 Programs 目录：%n%n%1%n%nWindows 11 右键菜单包注册不支持自定义安装位置。
+chinesesimplified.RegistrationFailed=Windows 11 右键菜单注册失败，安装未成功完成。%n%n诊断详情已保存到：%n%1%n%n重试前，请先从“已安装的应用”中移除 Menu11 for Git。
 chinesesimplified.UnregistrationFailed=Menu11 for Git 无法移除包注册。请关闭资源管理器窗口后重试卸载。
 
 [Types]
@@ -123,7 +133,7 @@ Name: "{autodesktop}\Menu11 for Git"; Filename: "{app}\{#ProductExe}"; WorkingDi
 
 [Run]
 Filename: "{sysnative}\WindowsPowerShell\v1.0\powershell.exe"; Parameters: "-NoProfile -NonInteractive -ExecutionPolicy Bypass -File ""{app}\Installer\register-package.ps1"" -InstallDirectory ""{app}"""; StatusMsg: "{cm:RegisterContextMenu}"; Flags: runhidden waituntilterminated; Components: contextmenu; AfterInstall: VerifyPackageRegistration
-Filename: "{app}\{#ProductExe}"; Description: "{cm:LaunchMenu11}"; Flags: nowait postinstall skipifsilent unchecked
+Filename: "{app}\{#ProductExe}"; Description: "{cm:LaunchMenu11}"; Flags: nowait postinstall skipifsilent unchecked; Check: PackageRegistrationSucceeded
 
 [UninstallRun]
 Filename: "{sysnative}\WindowsPowerShell\v1.0\powershell.exe"; Parameters: "-NoProfile -NonInteractive -ExecutionPolicy Bypass -File ""{app}\Installer\unregister-package.ps1"" -InstallDirectory ""{app}"""; Flags: runhidden waituntilterminated; RunOnceId: "UnregisterMenu11Package"
@@ -133,6 +143,7 @@ var
   GitRoot: String;
   GitVersionText: String;
   GitStatusPage: TOutputMsgWizardPage;
+  PackageRegistrationFailed: Boolean;
 
 function FileExistsAtGitRoot(const Root, RelativePath: String): Boolean;
 begin
@@ -245,6 +256,7 @@ end;
 
 procedure InitializeWizard;
 begin
+  WizardForm.DirEdit.Text := ExpandConstant('{localappdata}\Programs\Menu11 for Git');
   WizardForm.WelcomeLabel1.Caption := CustomMessage('WelcomeTitle');
   WizardForm.WelcomeLabel2.Caption := CustomMessage('WelcomeBody');
   WizardForm.FinishedHeadingLabel.Caption := CustomMessage('FinishedReady');
@@ -259,19 +271,48 @@ end;
 procedure VerifyPackageRegistration;
 var
   ResultCode: Integer;
+  ErrorLogPath: String;
 begin
   if not Exec(
     ExpandConstant('{sysnative}\WindowsPowerShell\v1.0\powershell.exe'),
     '-NoProfile -NonInteractive -Command "if (-not (Get-AppxPackage -Name Menu11ForGit.GitBash -ErrorAction SilentlyContinue)) { exit 1 }; if (-not (Get-AppxPackage -Name Menu11ForGit.GitGui -ErrorAction SilentlyContinue)) { exit 1 }; if (-not (Get-AppxPackage -Name Menu11ForGit.GitCommands -ErrorAction SilentlyContinue)) { exit 1 }"',
     '', SW_HIDE, ewWaitUntilTerminated, ResultCode) or (ResultCode <> 0) then
-    RaiseException(CustomMessage('RegistrationFailed'));
+  begin
+    PackageRegistrationFailed := True;
+    ErrorLogPath := ExpandConstant('{app}\Installer\registration-error.log');
+    SuppressibleMsgBox(
+      FmtMessage(CustomMessage('RegistrationFailed'), [ErrorLogPath]),
+      mbCriticalError, MB_OK, IDOK);
+  end;
+end;
+
+function PackageRegistrationSucceeded: Boolean;
+begin
+  Result := not PackageRegistrationFailed;
+end;
+
+function ShouldSkipPage(PageID: Integer): Boolean;
+begin
+  Result := PackageRegistrationFailed and (PageID = wpFinished);
+end;
+
+function GetCustomSetupExitCode: Integer;
+begin
+  if PackageRegistrationFailed then
+    Result := 10
+  else
+    Result := 0;
 end;
 
 function PrepareToInstall(var NeedsRestart: Boolean): String;
 var
   ResultCode: Integer;
 begin
-  if not DetectGitForWindows then
+  if CompareText(
+    AddBackslash(ExpandFileName(ExpandConstant('{app}'))),
+    AddBackslash(ExpandFileName(ExpandConstant('{localappdata}\Programs\Menu11 for Git')))) <> 0 then
+    Result := FmtMessage(CustomMessage('UnsupportedInstallLocation'), [ExpandConstant('{localappdata}\Programs\Menu11 for Git')])
+  else if not DetectGitForWindows then
     Result := CustomMessage('GitMissing')
   else
   begin

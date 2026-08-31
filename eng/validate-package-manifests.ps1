@@ -3,6 +3,9 @@ param()
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent $PSScriptRoot
+[xml] $productProps = Get-Content -LiteralPath (Join-Path $repoRoot 'eng\Product.props') -Raw
+$expectedPackageVersion = [string] $productProps.Project.PropertyGroup.Menu11FileVersion
+$expectedLanguages = @('en-us', 'zh-cn')
 $definitions = @(
     @{ Identity = 'Menu11ForGit.GitBash'; RelativePath = 'GitBash\AppxManifest.xml' },
     @{ Identity = 'Menu11ForGit.GitGui'; RelativePath = 'GitGui\AppxManifest.xml' },
@@ -28,6 +31,18 @@ foreach ($definition in $definitions) {
     $identity = $manifest.SelectSingleNode('/f:Package/f:Identity', $namespaces)
     if ($null -eq $identity -or $identity.Name -ne $definition.Identity) {
         throw "Unexpected package identity in ${manifestPath}: $($identity.Name)"
+    }
+    if ([string] $identity.Version -cne $expectedPackageVersion) {
+        throw "$($definition.Identity) version $($identity.Version) does not match $expectedPackageVersion."
+    }
+
+    $languages = @(
+        $manifest.SelectNodes('/f:Package/f:Resources/f:Resource', $namespaces) |
+            ForEach-Object { ([string] $_.Language).ToLowerInvariant() } |
+            Sort-Object -Unique
+    )
+    if (Compare-Object -ReferenceObject $expectedLanguages -DifferenceObject $languages) {
+        throw "$($definition.Identity) must declare only en-us and zh-cn resources."
     }
 
     $applications = @($manifest.SelectNodes('/f:Package/f:Applications/f:Application', $namespaces))
@@ -61,4 +76,4 @@ foreach ($definition in $definitions) {
     }
 }
 
-Write-Output 'Validated three single-Verb Menu11 sparse package manifests.'
+Write-Output "Validated three single-Verb Menu11 sparse package manifests at version $expectedPackageVersion."

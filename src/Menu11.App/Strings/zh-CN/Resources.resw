@@ -55,6 +55,7 @@
   <data name="RestoreDefaultsButtonLabel.Text" xml:space="preserve"><value>恢复默认设置</value></data>
   <data name="ExplorerRefreshedTitle" xml:space="preserve"><value>已刷新资源管理器</value></data>
   <data name="ExplorerRefreshedMessage" xml:space="preserve"><value>新的右键菜单设置将在下次打开资源管理器菜单时生效。</value></data>
+  <data name="ContextMenuRegistrationFailed" xml:space="preserve"><value>无法更新右键菜单</value></data>
   <data name="RestoreDefaultsDialogTitle" xml:space="preserve"><value>恢复默认设置？</value></data>
   <data name="RestoreDefaultsDialogContent" xml:space="preserve"><value>这将重置 Menu11 命令、语言和资源管理器偏好。</value></data>
   <data name="RestoreDefaultsDialogPrimary" xml:space="preserve"><value>恢复</value></data>

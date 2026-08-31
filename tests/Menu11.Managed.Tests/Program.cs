@@ -98,6 +98,25 @@ try
         "uses the system language by default");
     Expect(defaults.AutomaticallyCheckForUpdates,
         "checks for updates on application launch by default");
+    var defaultPackages = ContextMenuPackageSelection.FromSettings(defaults);
+    Expect(defaultPackages.GitBash && defaultPackages.GitGui && defaultPackages.GitCommands,
+        "registers all context-menu packages for the default settings");
+
+    var disabledPackages = ContextMenuPackageSelection.FromSettings(defaults with { Enabled = false });
+    Expect(!disabledPackages.GitBash && !disabledPackages.GitGui && !disabledPackages.GitCommands,
+        "unregisters every context-menu package when Menu11 is disabled");
+
+    var noGitGuiPackage = ContextMenuPackageSelection.FromSettings(defaults with { ShowGitGui = false });
+    Expect(noGitGuiPackage.GitBash && !noGitGuiPackage.GitGui && noGitGuiPackage.GitCommands,
+        "unregisters the Git GUI package when its top-level command is disabled");
+
+    var emptyGitMenuPackages = ContextMenuPackageSelection.FromSettings(defaults with
+    {
+        EnabledCommands = GitCommands.None,
+        ShowSettingsCommand = false,
+    });
+    Expect(!emptyGitMenuPackages.GitCommands,
+        "unregisters the Git package when its submenu has no enabled commands");
 
     var custom = new Menu11Settings
     {
@@ -143,29 +162,29 @@ try
 
     var installerPayload = Encoding.UTF8.GetBytes("verified Menu11 installer payload");
     var installerHash = Convert.ToHexString(SHA256.HashData(installerPayload));
-    const string installerName = "Menu11ForGitSetup-0.1.2-x64.exe";
+    const string installerName = "Menu11ForGitSetup-0.1.3-x64.exe";
     var checksumText = $"{installerHash} *{installerName}\n";
     Expect(UpdateChecksum.TryParse(checksumText, installerName, out var parsedHash) &&
         parsedHash.SequenceEqual(SHA256.HashData(installerPayload)),
         "parses a release SHA-256 manifest for the exact installer name");
-    Expect(!UpdateChecksum.TryParse(checksumText, "Menu11ForGitSetup-0.1.3-x64.exe", out _),
+    Expect(!UpdateChecksum.TryParse(checksumText, "Menu11ForGitSetup-0.1.4-x64.exe", out _),
         "rejects a checksum manifest for another installer");
 
     var releaseJson = $$"""
         {
-          "tag_name": "v0.1.2",
-          "html_url": "https://github.com/CodeH-top/Menu11-For-Git/releases/tag/v0.1.2",
+          "tag_name": "v0.1.3",
+          "html_url": "https://github.com/CodeH-top/Menu11-For-Git/releases/tag/v0.1.3",
           "draft": false,
           "prerelease": false,
           "assets": [
             {
               "name": "{{installerName}}",
-              "browser_download_url": "https://github.com/CodeH-top/Menu11-For-Git/releases/download/v0.1.2/{{installerName}}",
+              "browser_download_url": "https://github.com/CodeH-top/Menu11-For-Git/releases/download/v0.1.3/{{installerName}}",
               "size": {{installerPayload.Length}}
             },
             {
               "name": "{{installerName}}.sha256",
-              "browser_download_url": "https://github.com/CodeH-top/Menu11-For-Git/releases/download/v0.1.2/{{installerName}}.sha256",
+              "browser_download_url": "https://github.com/CodeH-top/Menu11-For-Git/releases/download/v0.1.3/{{installerName}}.sha256",
               "size": {{Encoding.UTF8.GetByteCount(checksumText)}}
             }
           ]
@@ -181,8 +200,8 @@ try
         };
     }));
     var releaseClient = new GitHubReleaseClient(releaseHttpClient);
-    var updateCheck = await releaseClient.CheckForUpdatesAsync(new ProductVersion(0, 1, 1));
-    Expect(updateCheck.AvailableRelease?.Version == new ProductVersion(0, 1, 2),
+    var updateCheck = await releaseClient.CheckForUpdatesAsync(new ProductVersion(0, 1, 2));
+    Expect(updateCheck.AvailableRelease?.Version == new ProductVersion(0, 1, 3),
         "discovers a newer stable GitHub release");
     Expect(updateCheck.AvailableRelease?.InstallerFileName == installerName,
         "requires the versioned x64 Setup asset name");

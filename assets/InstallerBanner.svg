@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="320" viewBox="0 0 1024 320" role="img" aria-labelledby="title description">
+<svg xmlns="http://www.w3.org/2000/svg" width="656" height="1256" viewBox="0 0 656 1256" role="img" aria-labelledby="title description">
   <title id="title">Menu11 for Git installer banner</title>
-  <desc id="description">Menu11 for Git orange-red angular dual-rail merge mark and product name on a warm light installer banner.</desc>
-  <rect width="1024" height="320" fill="#FFFBF9" />
-  <rect width="292" height="320" fill="#FFF0EA" />
-  <rect x="0" y="308" width="1024" height="12" fill="#F4512C" />
-  <rect x="0" y="308" width="292" height="12" fill="#FFB39F" />
+  <desc id="description">A portrait Menu11 for Git installer panel with the orange-red dual-rail merge mark and stacked product name.</desc>
+  <rect width="656" height="1256" fill="#FFFBF9" />
+  <rect width="10" height="1256" fill="#F4512C" />
+  <rect x="10" width="646" height="24" fill="#FFF0EA" />
 
-  <g transform="translate(34 34) scale(.984375)">
+  <g transform="translate(181 165) scale(1.15)">
     <rect x="16" y="16" width="224" height="224" rx="56" fill="#F4512C" />
     <g fill="none" stroke="#FFF8F4" stroke-linecap="round" stroke-linejoin="round" stroke-width="16">
       <path d="M82 68V190" />
@@ -20,13 +19,12 @@
     </g>
   </g>
 
-  <text x="350" y="137" fill="#4B2922" font-family="Segoe UI, Arial, sans-serif" font-size="58" font-weight="700">Menu11 for Git</text>
-  <text x="354" y="190" fill="#77534A" font-family="Segoe UI, Arial, sans-serif" font-size="25">Native Windows 11 context menu integration</text>
-  <g fill="#77534A" font-family="Segoe UI, Arial, sans-serif" font-size="20">
-    <text x="354" y="239">Lightweight</text>
-    <circle cx="477" cy="232" r="4" fill="#F4512C" />
-    <text x="494" y="239">Configurable</text>
-    <circle cx="624" cy="232" r="4" fill="#FF9F87" />
-    <text x="641" y="239">Uses Git for Windows</text>
-  </g>
+  <text x="333" y="585" text-anchor="middle" fill="#3E2B27" font-family="Segoe UI, Arial, sans-serif" font-size="62" font-weight="700">Menu11</text>
+  <text x="333" y="647" text-anchor="middle" fill="#684943" font-family="Segoe UI, Arial, sans-serif" font-size="42">for Git</text>
+  <rect x="215" y="704" width="236" height="4" rx="2" fill="#FFB39F" />
+  <text x="333" y="778" text-anchor="middle" fill="#77534A" font-family="Segoe UI, Arial, sans-serif" font-size="24">Native Windows 11 Git</text>
+  <circle cx="285" cy="850" r="7" fill="#F4512C" />
+  <circle cx="333" cy="850" r="7" fill="#D4A72C" />
+  <circle cx="381" cy="850" r="7" fill="#7A5AF8" />
+  <rect x="10" y="1240" width="646" height="16" fill="#FF8B73" />
 </svg>

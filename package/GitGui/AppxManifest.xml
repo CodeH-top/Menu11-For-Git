@@ -11,7 +11,7 @@
   <Identity
       Name="Menu11ForGit.GitGui"
       Publisher="CN=Menu11ForGit"
-      Version="0.1.1.0"
+      Version="0.1.2.0"
       ProcessorArchitecture="neutral" />
   <Properties>
     <DisplayName>Menu11 for Git - Git GUI command</DisplayName>

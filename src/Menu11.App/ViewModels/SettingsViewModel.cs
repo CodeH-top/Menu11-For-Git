@@ -68,35 +68,39 @@ public sealed class SettingsViewModel : INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
+    public event Action<Menu11Settings>? ShellSettingsChanged;
 
     public bool Enabled
     {
         get => _settings.Enabled;
-        set => Update(_settings with { Enabled = value }, nameof(Enabled));
+        set => Update(_settings with { Enabled = value }, nameof(Enabled), affectsShell: true);
     }
 
     public bool ShowGitBash
     {
         get => _settings.ShowGitBash;
-        set => Update(_settings with { ShowGitBash = value }, nameof(ShowGitBash));
+        set => Update(_settings with { ShowGitBash = value }, nameof(ShowGitBash), affectsShell: true);
     }
 
     public bool ShowGitGui
     {
         get => _settings.ShowGitGui;
-        set => Update(_settings with { ShowGitGui = value }, nameof(ShowGitGui));
+        set => Update(_settings with { ShowGitGui = value }, nameof(ShowGitGui), affectsShell: true);
     }
 
     public bool ShowSettingsCommand
     {
         get => _settings.ShowSettingsCommand;
-        set => Update(_settings with { ShowSettingsCommand = value }, nameof(ShowSettingsCommand));
+        set => Update(
+            _settings with { ShowSettingsCommand = value },
+            nameof(ShowSettingsCommand),
+            affectsShell: true);
     }
 
     public bool ShowIcons
     {
         get => _settings.ShowIcons;
-        set => Update(_settings with { ShowIcons = value }, nameof(ShowIcons));
+        set => Update(_settings with { ShowIcons = value }, nameof(ShowIcons), affectsShell: true);
     }
 
     public bool AutomaticallyCheckForUpdates
@@ -116,6 +120,7 @@ public sealed class SettingsViewModel : INotifyPropertyChanged
     }
 
     public string ConfiguredGitPath => _settings.GitPath ?? string.Empty;
+    public Menu11Settings CurrentSettings => _settings;
     public string GitStatus => LocalizationService.GetString(
         _gitInstallation is null ? "GitStatusNotDetected" : "GitStatusDetected");
     public string GitInstallRoot => _gitInstallation?.InstallRoot ?? LocalizationService.GetString("NotDetected");
@@ -187,6 +192,7 @@ public sealed class SettingsViewModel : INotifyPropertyChanged
         RefreshGitDetection();
         RefreshCommandSettings();
         NotifyAllSettingsProperties();
+        ShellSettingsChanged?.Invoke(_settings);
     }
 
     public void SetAllGitCommands(bool enabled)
@@ -201,6 +207,7 @@ public sealed class SettingsViewModel : INotifyPropertyChanged
         _settingsStore.Save(_settings);
         RefreshCommandSettings();
         NotifyCommandSummaries();
+        ShellSettingsChanged?.Invoke(_settings);
     }
 
     internal bool IsCommandEnabled(GitCommands command)
@@ -222,6 +229,7 @@ public sealed class SettingsViewModel : INotifyPropertyChanged
         _settings = _settings with { EnabledCommands = commands };
         _settingsStore.Save(_settings);
         NotifyCommandSummaries();
+        ShellSettingsChanged?.Invoke(_settings);
     }
 
     private int CountEnabled(GitCommands commands)
@@ -244,7 +252,7 @@ public sealed class SettingsViewModel : INotifyPropertyChanged
         OnPropertyChanged(nameof(OtherSummary));
     }
 
-    private void Update(Menu11Settings updated, string propertyName)
+    private void Update(Menu11Settings updated, string propertyName, bool affectsShell = false)
     {
         if (_settings == updated)
         {
@@ -254,6 +262,10 @@ public sealed class SettingsViewModel : INotifyPropertyChanged
         _settings = updated;
         _settingsStore.Save(_settings);
         OnPropertyChanged(propertyName);
+        if (affectsShell)
+        {
+            ShellSettingsChanged?.Invoke(_settings);
+        }
     }
 
     private void NotifyAllSettingsProperties()
